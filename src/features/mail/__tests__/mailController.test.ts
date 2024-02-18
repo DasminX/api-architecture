@@ -3,10 +3,9 @@ import { IMailService } from "../service/mailService";
 import { TSendMailRequestBody } from "../model/sendMailRequestBody";
 import { TSendMailResponse } from "../types/sendMailResponse";
 
-// Mockujemy serwis - oczywiście nie powinien nigdy zwracać true, ale jest tak tylko dla głupiego zobrazowania, jak bardzo pomaga stworzenie interfejsu w testowaniu
-// Oczywiście powinniśmy w nim zrobić różne scenariusze, kiedy ma się wywalać, a kiedy działać.
-// Podejrzewam, że można nawet inaczej zrobić tego mocka niż po prostu przez stworzenie klasy na kształt interfejsu, ale mi sie już nie chce xD
-// Więcej jest pewnie w docsach Vitest/Jest
+// We're fixing the service - of course it should never return {success: true}, but this is just for a silly illustration of how much
+// it helps to create an interface for testing.
+// Of course, we should make different scenarios in it, when it should crash and when it should work.
 class MockMailService implements IMailService {
   public sendMail(
     credentials: TSendMailRequestBody
