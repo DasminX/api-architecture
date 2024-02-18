@@ -58,6 +58,23 @@ $ cd api-architecture
 
     ```
 
-When successfully running, you can make an API calls to localhost:3000!
+### How to use it?
 
-STILL IN PROGRESS!!! MORE SOON.
+When successfully run, you can make an API calls to localhost:3000!
+
+1. Make POST Request to localhost:3000/api/mail/send
+2. Prepare object in shape of:
+
+```
+
+{
+    "sender": "testmail@example.com",
+    "content": "Test test test test test test test test test test test test",
+    "subject": "Test subject"
+}
+
+```
+
+**NOTE: Valid credentials don't work yet! Only thing you can do is to send invalid credentials!**
+
+## STILL IN PROGRESS!!! MORE SOON
