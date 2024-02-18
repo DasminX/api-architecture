@@ -10,7 +10,9 @@
     "build": "tsc",
     "start": "node ./dist/server.js",
     "start:prod": "npm cache clean --force && npm run build && npm run start",
-    "start:dev": "nodemon --legacy-watch ./src/server.ts"
+    "start:dev": "nodemon --legacy-watch ./src/server.ts",
+    "docker:build-image": "docker image build -t api-architecture .",
+    "docker:start-container": "docker container run -p 3000:3000 --name api-architecture-cont api-architecture"
   },
   "dependencies": {
     "compression": "^1.7.4",
