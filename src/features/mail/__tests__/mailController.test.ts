@@ -16,14 +16,15 @@ class MockMailService implements IMailService {
 
 // Dummy test
 describe("mailService", () => {
-  it("should send mail", () => {
-    const mailService = new MockMailService().sendMail({
+  it("should send mail", async () => {
+    const mailServiceResponse = await new MockMailService().sendMail({
       sender: "josue@example.com",
       content:
         "content content content content content content content content content",
       subject: "New thing",
     });
 
-    expect(mailService).toBeTruthy();
+    expect(mailServiceResponse).toHaveProperty("success");
+    expect(mailServiceResponse.success).toBeTruthy();
   });
 });
