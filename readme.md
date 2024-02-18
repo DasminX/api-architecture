@@ -22,40 +22,41 @@ $ cd api-architecture
 
 ### Now there are two paths
 
-1. Using docker:
+#### Using docker
 
-    Create an image
+1. Create an image
 
     ```
 
     npm run docker:build-image
-    
-    ```
-
-    Run the container
 
     ```
 
-    npm run docker:start-container
-    
+2. Run the container
+
+```
+
+npm run docker:start-container
+
+```
+
+#### On local machine
+
+1. Install packages
+
     ```
 
-2. On local machine:
-
-    Install packages
-
-    ```
-    
     npm i
-    
+
     ```
 
-    Run development script
-    ```
-    
-    npm run start:dev
-    
-    ```
+2. Run development script
+
+```
+
+npm run start:dev
+
+```
 
 When successfully running, you can make an API calls to localhost:3000!
 
