@@ -13,9 +13,12 @@ I know it's not perfect, I'm learning a lot about it and immadietaly try to impl
 ### How to start it?
 
 Firstable, run:
-`git init`
-`git clone 'https://github.com/DasminX/api-architecture.git'`
-`cd api-architecture`
+
+```
+git init \
+git clone 'https://github.com/DasminX/api-architecture.git' \
+cd api-architecture
+```
 
 ### Now there are two paths
 
