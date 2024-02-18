@@ -46,7 +46,7 @@ cd api-architecture
 
     ```
 
-    docker container kill api-architecture-cont \
+    docker container kill api-architecture-cont &&
     docker container rm api-architecture-cont
 
     ```
