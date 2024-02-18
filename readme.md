@@ -16,8 +16,8 @@ Firstable, run:
 
 ```
 
-git init \
-git clone 'https://github.com/DasminX/api-architecture.git' \
+git init &&
+git clone 'https://github.com/DasminX/api-architecture.git' &&
 cd api-architecture
 
 ```
