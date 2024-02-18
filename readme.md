@@ -15,9 +15,9 @@ I know it's not perfect, I'm learning a lot about it and immadietaly try to impl
 Firstable, run:
 
 ```
-git init \
-git clone 'https://github.com/DasminX/api-architecture.git' \
-cd api-architecture
+$ git init \
+$ git clone 'https://github.com/DasminX/api-architecture.git' \
+$ cd api-architecture
 ```
 
 ### Now there are two paths
@@ -25,18 +25,37 @@ cd api-architecture
 1. Using docker:
 
     Create an image
-    `npm run docker:build-image`
+
+    ```
+
+    npm run docker:build-image
+    
+    ```
 
     Run the container
-    `npm run docker:start-container`
+
+    ```
+
+    npm run docker:start-container
+    
+    ```
 
 2. On local machine:
 
     Install packages
-    `npm i`
+
+    ```
+    
+    npm i
+    
+    ```
 
     Run development script
-    `npm run start:dev`
+    ```
+    
+    npm run start:dev
+    
+    ```
 
 When successfully running, you can make an API calls to localhost:3000!
 
