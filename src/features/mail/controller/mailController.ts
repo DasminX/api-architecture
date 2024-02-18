@@ -2,7 +2,7 @@ import { AppError } from "./../../../errors/appError";
 import { NextFunction, Request, Response } from "express";
 import { MailService } from "../service/mailService";
 import { SendMailRequestBody } from "../model/sendMailRequestBody";
-import { formatZodError } from "../../_shared/functions/formatZodError";
+import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 
 export const sendMail = async (
   req: Request,
@@ -15,7 +15,7 @@ export const sendMail = async (
   // Request body doesn't fit shape of Zod object
   if (!validationResult.success) {
     return next(
-      new AppError(formatZodError(validationResult.error.issues), 400)
+      new AppError(formatZodErrorIssues(validationResult.error.issues), 400)
     );
   }
 

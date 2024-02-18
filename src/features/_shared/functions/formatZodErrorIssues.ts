@@ -1,6 +1,6 @@
 import { ZodIssue } from "zod";
 
-export const formatZodError = (issues: ZodIssue[]) => {
+export const formatZodErrorIssues = (issues: ZodIssue[]) => {
   return issues
     .reduce<string[]>((acc, issue) => {
       const key = issue.path.join(".");
