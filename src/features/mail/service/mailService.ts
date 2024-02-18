@@ -12,7 +12,7 @@ export class MailService implements IMailService {
   private static _instance: MailService;
 
   // Private field of transporter class - only available within the class
-  private _transporter: Transporter;
+  private static _transporter: Transporter;
 
   // Private constructor - can't be called outside the class, e.g. in a controller do const mailService = new MailService() (Error!)
   private constructor() {
@@ -31,7 +31,7 @@ export class MailService implements IMailService {
 
   private _createTransporter() {
     // Custom config for transporter
-    this._transporter = createTransport({
+    MailService._transporter = createTransport({
       host: "random-host",
       port: 1234,
       secure: true,
@@ -48,7 +48,7 @@ export class MailService implements IMailService {
     subject,
   }: TSendMailRequestBody): Promise<TSendMailResponse> {
     try {
-      await this._transporter.sendMail({
+      await MailService._transporter.sendMail({
         from: sender,
         to: "host-mail@exampleabc.com",
         subject: subject,
@@ -56,8 +56,8 @@ export class MailService implements IMailService {
       });
 
       return { success: true };
-    } catch (e) {
-      return { success: false, error: e };
+    } catch (_e) {
+      return { success: false, error: "Something went wrong!" };
     }
   }
 }
