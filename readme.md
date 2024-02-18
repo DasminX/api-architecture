@@ -6,7 +6,7 @@ I have to admit, that I'm pretty new in considerations about architecture, but I
 
 I've made this project to show how I would build such project, using seperation of concerns, DRY principle, clean-coding and Object Oriented Paradigm.
 
-Also, you can find descriptions of my flow of thinking in many cases.
+Also, you can find descriptions of my flow of thinking in the code.
 
 I know it's not perfect, I'm learning a lot about it and immadietaly try to implement anything I learn.
 
@@ -22,7 +22,7 @@ cd api-architecture
 
 ```
 
-### Now there are two paths
+### Since now, there are two paths
 
 #### Using docker
 
@@ -46,8 +46,7 @@ cd api-architecture
 
     ```
 
-    docker container kill api-architecture-cont &&
-    docker container rm api-architecture-cont
+    npm run docker:destroy
 
     ```
 
@@ -71,10 +70,10 @@ cd api-architecture
 
 ### How to use it?
 
-When successfully run, you can make an API calls to localhost:3000!
+When successfully run, you can send API calls to localhost:3000!
 
-1. Make POST Request to localhost:3000/api/mail/send
-2. Prepare object in shape of:
+1. Send POST Request to localhost:3000/api/mail/send
+2. With object of shape:
 
 ```
 
@@ -86,6 +85,6 @@ When successfully run, you can make an API calls to localhost:3000!
 
 ```
 
-**NOTE: Valid credentials don't work yet! Only thing you can do is to send invalid credentials!**
+**NOTE: Valid credentials don't work yet! One thing you can do is to send invalid credentials!**
 
 ## STILL IN PROGRESS!!! MORE SOON
