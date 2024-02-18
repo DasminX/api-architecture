@@ -34,11 +34,11 @@ $ cd api-architecture
 
 2. Run the container
 
-```
+    ```
 
-npm run docker:start-container
+    npm run docker:start-container
 
-```
+    ```
 
 #### On local machine
 
@@ -52,11 +52,11 @@ npm run docker:start-container
 
 2. Run development script
 
-```
+    ```
 
-npm run start:dev
+    npm run start:dev
 
-```
+    ```
 
 When successfully running, you can make an API calls to localhost:3000!
 
