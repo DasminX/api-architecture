@@ -15,9 +15,11 @@ I know it's not perfect, I'm learning a lot about it and immadietaly try to impl
 Firstable, run:
 
 ```
-$ git init \
-$ git clone 'https://github.com/DasminX/api-architecture.git' \
-$ cd api-architecture
+
+git init \
+git clone 'https://github.com/DasminX/api-architecture.git' \
+cd api-architecture
+
 ```
 
 ### Now there are two paths
@@ -37,6 +39,15 @@ $ cd api-architecture
     ```
 
     npm run docker:start-container
+
+    ```
+
+3. After development, stop and remove container
+
+    ```
+
+    docker container kill api-architecture-cont \
+    docker container rm api-architecture-cont
 
     ```
 
