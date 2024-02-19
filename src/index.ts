@@ -14,11 +14,12 @@ const app = express();
 /* Configuring behaviour */
 app.options("*", cors());
 app.use(helmet());
+
+let morganMode = "combined";
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-} else {
-  app.use(morgan("combined"));
+  morganMode = "dev";
 }
+app.use(morgan(morganMode));
 app.use(express.json({ limit: "10kb" }));
 app.use(
   express.urlencoded({
