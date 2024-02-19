@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
   morganMode = "dev";
 }
 app.use(morgan(morganMode));
+
 app.use(express.json({ limit: "10kb" }));
 app.use(
   express.urlencoded({

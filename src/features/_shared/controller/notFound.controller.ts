@@ -6,5 +6,5 @@ export const notFoundController = (
   _res: Response,
   next: NextFunction
 ) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`${req.originalUrl} not found!`, 404));
 };

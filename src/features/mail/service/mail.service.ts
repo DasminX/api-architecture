@@ -1,10 +1,10 @@
 import { createTransport, Transporter } from "nodemailer";
-import { TSendMailRequestBody } from "../model/request-body.model";
-import { TSendMailResponse } from "../types/sendMailResponse";
+import { SendMailRequestBodyModelT } from "../model/sendMailRequestBody.model";
+import { SendMailResponseT } from "../types/sendMailResponse";
 
 // Interface for MailService - when testing, just make an object like this interface and substitute.
 export interface IMailService {
-  sendMail(credentials: TSendMailRequestBody): Promise<TSendMailResponse>;
+  sendMail(credentials: SendMailRequestBodyModelT): Promise<SendMailResponseT>;
 }
 
 export class MailService implements IMailService {
@@ -46,7 +46,7 @@ export class MailService implements IMailService {
     sender,
     content,
     subject,
-  }: TSendMailRequestBody): Promise<TSendMailResponse> {
+  }: SendMailRequestBodyModelT): Promise<SendMailResponseT> {
     try {
       await MailService._transporter.sendMail({
         from: sender,

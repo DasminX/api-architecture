@@ -14,3 +14,5 @@ export const errorController = (
     stack: process.env.NODE_ENV === "development" ? err.stack : null,
   });
 };
+
+/* TODO: consider more flexible reponse, maybe call some instances of errors? */

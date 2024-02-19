@@ -1,7 +1,7 @@
 import { AppError } from "../../../errors/appError";
 import { NextFunction, Request, Response } from "express";
 import { MailService } from "../service/mail.service";
-import { SendMailRequestBody } from "../model/request-body.model";
+import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 
 export const sendMail = async (
@@ -9,25 +9,26 @@ export const sendMail = async (
   res: Response,
   next: NextFunction
 ) => {
-  // Check incoming request body to fit the shape of model (sendMailRequestBody)
-  const validationResult = SendMailRequestBody.safeParse(req.body);
+  // Check incoming request body to fit the shape of model (sendMailRequestBodyModel)
+  const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
   // Request body doesn't fit shape of Zod object
   if (!validationResult.success) {
     return next(
       new AppError(formatZodErrorIssues(validationResult.error.issues), 400)
     );
+    /* TODO: consider AppError instances, e.g. ValidationError extends AppError... */
   }
 
-  // Create or return instance of MailService singleton
-  const mailService = MailService.getInstance();
-
-  // Invoke sendMail method on mailService
-  const sendMailResult = await mailService.sendMail(validationResult.data);
+  // Create or return instance of MailService singleton and call sendMail method on it
+  const sendMailResult = await MailService.getInstance().sendMail(
+    validationResult.data
+  );
 
   // Error in nodemailer
   if (!sendMailResult.success) {
     return next(new AppError(sendMailResult.error, 500));
+    /* TODO: InternalError, MailError ? */
   }
 
   return res.json(sendMailResult);
