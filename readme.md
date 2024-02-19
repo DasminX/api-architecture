@@ -30,7 +30,7 @@ cd api-architecture
 
     ```
 
-    npm run docker:build-image
+    npm run docker:build
 
     ```
 
@@ -38,7 +38,7 @@ cd api-architecture
 
     ```
 
-    npm run docker:start-container
+    npm run docker:start
 
     ```
 
