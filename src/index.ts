@@ -4,9 +4,9 @@ import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
-import mailRouter from "./features/mail/route/mailRoute";
-import { notFoundController } from "./features/_shared/controller/notFoundController";
-import { errorController } from "./features/_shared/controller/errorController";
+import mailRouter from "./features/mail/route/mail.route";
+import { notFoundController } from "./features/_shared/controller/notFound.controller";
+import { errorController } from "./features/_shared/controller/error.controller";
 
 /* Initialization */
 const app = express();

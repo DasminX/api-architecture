@@ -1,9 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { IMailService } from "../service/mailService";
+import { IMailService } from "../service/mail.service";
 import {
   SendMailRequestBody,
   TSendMailRequestBody,
-} from "../model/sendMailRequestBody";
+} from "../model/request-body.model";
 import { TSendMailResponse } from "../types/sendMailResponse";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { ZodError } from "zod";
