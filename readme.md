@@ -10,6 +10,13 @@ Also, you can find descriptions of my flow of thinking in the code.
 
 I know it's not perfect, I'm learning a lot about it and immadietaly try to implement anything I learn.
 
+### How is this repository organised?
+
+Repository consists of different branches - each for every big step in refactoring an application.
+They will be ordered ascending - from simple to more and more complex.
+It may change over time!
+**NOTE: Usually master branch should be up to date to the newest and most complex version, but I will merge it after some commits - to not merge every little change!**
+
 ### How to start it?
 
 Firstable, run:
