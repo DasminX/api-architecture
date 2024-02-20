@@ -4,16 +4,12 @@ import { MailService } from "../service/mail.service";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 
-export interface MailControllerI {
-  sendMail(
+export class MailController {
+  public static async sendMail(
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<Response | void>;
-}
-
-export class MailController implements MailControllerI {
-  async sendMail(req: Request, res: Response, next: NextFunction) {
+  ) {
     // Check incoming request body to fit the shape of model (sendMailRequestBodyModel)
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
