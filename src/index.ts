@@ -8,32 +8,34 @@ import mailRouter from "./features/mail/route/mail.route";
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
 
-/* Initialization */
-const app = express();
+export const createApp = () => {
+  /* Initialization */
+  const app = express();
 
-/* Configuring behaviour */
-app.options("*", cors());
-app.use(helmet());
+  /* Configuring behaviour */
+  app.options("*", cors());
+  app.use(helmet());
 
-let morganMode = "combined";
-if (process.env.NODE_ENV === "development") {
-  morganMode = "dev";
-}
-app.use(morgan(morganMode));
+  let morganMode = "combined";
+  if (process.env.NODE_ENV === "development") {
+    morganMode = "dev";
+  }
+  app.use(morgan(morganMode));
 
-app.use(express.json({ limit: "10kb" }));
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.use(compression());
+  app.use(express.json({ limit: "10kb" }));
+  app.use(
+    express.urlencoded({
+      extended: true,
+    })
+  );
+  app.use(compression());
 
-/* Routes */
-app.use("/api/mail", mailRouter);
+  /* Routes */
+  app.use("/api/mail", mailRouter);
 
-app.all("*", notFoundController);
+  app.all("*", notFoundController);
 
-app.use(errorController);
+  app.use(errorController);
 
-export default app;
+  return app;
+};
