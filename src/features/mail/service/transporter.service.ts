@@ -1,5 +1,21 @@
-import { Transporter } from "nodemailer";
+import { Transporter, createTransport } from "nodemailer";
 
 export class TransporterService {
-  constructor(public readonly transporter: Transporter) {}
+  private _transporter: Transporter = this._createTransport();
+
+  private _createTransport() {
+    return createTransport({
+      host: "random-host",
+      port: 1234,
+      secure: true,
+      auth: {
+        user: "some-user",
+        pass: "some-password",
+      },
+    });
+  }
+
+  public get transporter() {
+    return this._transporter;
+  }
 }
