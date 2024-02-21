@@ -19,3 +19,5 @@ export class TransporterService {
     return this._transporter;
   }
 }
+
+export const transporterServiceInstance = new TransporterService();

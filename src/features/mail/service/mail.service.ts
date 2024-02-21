@@ -1,6 +1,10 @@
 import { createTransport, Transporter } from "nodemailer";
 import { SendMailRequestBodyModelT } from "../model/sendMailRequestBody.model";
 import { SendMailResponseT } from "../types/sendMailResponse";
+import {
+  TransporterService,
+  transporterServiceInstance,
+} from "./transporter.service";
 
 // Interface for MailService - when testing, just make an object like this interface and substitute.
 export interface IMailService {
@@ -8,39 +12,7 @@ export interface IMailService {
 }
 
 export class MailService implements IMailService {
-  // We store instances as a private static field in the class so that it cannot be seen outside the class, e.g. in the controller make MailService.instance (Error!).
-  private static _instance: MailService;
-
-  // Private field of transporter class - only available within the class
-  private static _transporter: Transporter;
-
-  // Private constructor - can't be called outside the class, e.g. in a controller do const mailService = new MailService() (Error!)
-  private constructor() {
-    // We create the transporter only once when we first create an instance of the class
-    this._createTransporter();
-  }
-
-  // Static method - ensures that it will create only one instance of the object during the entire lifecycle
-  public static getInstance() {
-    if (!MailService._instance) {
-      MailService._instance = new MailService();
-    }
-
-    return MailService._instance;
-  }
-
-  private _createTransporter() {
-    // Custom config for transporter
-    MailService._transporter = createTransport({
-      host: "random-host",
-      port: 1234,
-      secure: true,
-      auth: {
-        user: "some-user",
-        pass: "some-password",
-      },
-    });
-  }
+  constructor(private readonly _transporterService: TransporterService) {}
 
   public async sendMail({
     sender,
@@ -48,7 +20,7 @@ export class MailService implements IMailService {
     subject,
   }: SendMailRequestBodyModelT): Promise<SendMailResponseT> {
     try {
-      await MailService._transporter.sendMail({
+      await this._transporterService.transporter.sendMail({
         from: sender,
         to: "host-mail@exampleabc.com",
         subject: subject,
@@ -61,6 +33,8 @@ export class MailService implements IMailService {
     }
   }
 }
+
+export const mailServiceInstance = new MailService(transporterServiceInstance);
 
 /* Considerations */
 // You can still think how you can more isolate the service that sends emails (MailService class) from the functions, objects, methods associated with the Nodemailer itself.
