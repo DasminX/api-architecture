@@ -11,38 +11,55 @@ import { MailService } from "./features/mail/service/mail.service";
 import { TransporterService } from "./features/mail/service/transporter.service";
 import { MailRoute } from "./features/mail/route/mail.route";
 
-export const createApp = () => {
-  /* Initialization */
-  const app = express();
+export class App {
+  private readonly _app;
 
-  /* Configuring behaviour */
-  app.options("*", cors());
-  app.use(helmet());
+  constructor() {
+    this._app = express();
 
-  let morganMode = "combined";
-  if (process.env.NODE_ENV === "development") {
-    morganMode = "dev";
+    this._setProtection();
+    this._setLogger();
+    this._setRequestRelatedOpts();
+    this._setHandlers();
   }
-  app.use(morgan(morganMode));
 
-  app.use(express.json({ limit: "10kb" }));
-  app.use(
-    express.urlencoded({
-      extended: true,
-    })
-  );
-  app.use(compression());
+  public get app() {
+    return this._app;
+  }
 
-  /* Routes */
-  app.use(
-    "/api/mail",
-    new MailRoute(new MailController(new MailService(new TransporterService())))
-      .router
-  );
+  private _setProtection() {
+    this._app.options("*", cors());
+    this._app.use(helmet());
+  }
 
-  app.all("*", notFoundController);
+  private _setLogger() {
+    let morganMode = "combined";
+    if (process.env.NODE_ENV === "development") {
+      morganMode = "dev";
+    }
+    this._app.use(morgan(morganMode));
+  }
 
-  app.use(errorController);
+  private _setRequestRelatedOpts() {
+    this._app.use(express.json({ limit: "10kb" }));
+    this._app.use(
+      express.urlencoded({
+        extended: true,
+      })
+    );
+    this._app.use(compression());
+  }
 
-  return app;
-};
+  private _setHandlers() {
+    this._app.use(
+      "/api/mail",
+      new MailRoute(
+        new MailController(new MailService(new TransporterService()))
+      ).router
+    );
+
+    this._app.all("*", notFoundController);
+
+    this._app.use(errorController);
+  }
+}

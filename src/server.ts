@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import path from "path";
-import { createApp } from "./index";
+import { App } from ".";
 
 process.on("uncaughtException", (err) => {
   console.log("UNCAUGHT EXCEPTION! Shutting down...");
@@ -13,7 +13,7 @@ dotenv.config({ path: path.join(process.cwd(), ".env") });
 
 const port = process.env.PORT || 3000;
 
-const app = createApp();
+const { app } = new App();
 
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
