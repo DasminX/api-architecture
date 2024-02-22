@@ -3,10 +3,9 @@ import { NextFunction, Request, Response } from "express";
 import { MailService } from "../service/mail.service";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
-import { TransporterService } from "../service/transporter.service";
 
 export class MailController {
-  constructor(private _mailService: MailService) {}
+  constructor(private readonly _mailService: MailService) {}
 
   public async sendMail(req: Request, res: Response, next: NextFunction) {
     // Check incoming request body to fit the shape of model (sendMailRequestBodyModel)

@@ -1,14 +1,19 @@
-import express from "express";
+import express, { Router } from "express";
 import { MailController } from "../controller/mail.controller";
-import { MailService } from "../service/mail.service";
-import { TransporterService } from "../service/transporter.service";
 
-const mailController = new MailController(
-  new MailService(new TransporterService())
-);
+export class MailRoute {
+  private _router: Router;
 
-const router = express.Router();
+  constructor(private readonly _mailController: MailController) {
+    this._router = express.Router();
+    this._applyRoutesHandlers();
+  }
 
-router.post("/send", mailController.sendMail);
+  private _applyRoutesHandlers() {
+    this._router.post("/send", this._mailController.sendMail);
+  }
 
-export default router;
+  public get router() {
+    return this._router;
+  }
+}

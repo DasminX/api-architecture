@@ -8,7 +8,7 @@ export interface IMailService {
 }
 
 export class MailService implements IMailService {
-  constructor(private readonly _transporterService: TransporterService) {}
+  constructor(private readonly transporterService: TransporterService) {}
 
   public async sendMail({
     sender,
@@ -16,7 +16,7 @@ export class MailService implements IMailService {
     subject,
   }: SendMailRequestBodyModelT): Promise<SendMailResponseT> {
     try {
-      await this._transporterService.transporter.sendMail({
+      await this.transporterService.transporter.sendMail({
         from: sender,
         to: "host-mail@exampleabc.com",
         subject: subject,

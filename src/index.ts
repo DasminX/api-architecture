@@ -4,9 +4,12 @@ import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
-import mailRouter from "./features/mail/route/mail.route";
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
+import { MailController } from "./features/mail/controller/mail.controller";
+import { MailService } from "./features/mail/service/mail.service";
+import { TransporterService } from "./features/mail/service/transporter.service";
+import { MailRoute } from "./features/mail/route/mail.route";
 
 export const createApp = () => {
   /* Initialization */
@@ -31,7 +34,11 @@ export const createApp = () => {
   app.use(compression());
 
   /* Routes */
-  app.use("/api/mail", mailRouter);
+  app.use(
+    "/api/mail",
+    new MailRoute(new MailController(new MailService(new TransporterService())))
+      .router
+  );
 
   app.all("*", notFoundController);
 
