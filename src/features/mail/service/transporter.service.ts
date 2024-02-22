@@ -1,7 +1,7 @@
 import { Transporter, createTransport } from "nodemailer";
 
 export class TransporterService {
-  private _transporter: Transporter = this._createTransport();
+  public transporter: Transporter = this._createTransport();
 
   private _createTransport() {
     return createTransport({
@@ -14,10 +14,4 @@ export class TransporterService {
       },
     });
   }
-
-  public get transporter() {
-    return this._transporter;
-  }
 }
-
-export const transporterServiceInstance = new TransporterService();

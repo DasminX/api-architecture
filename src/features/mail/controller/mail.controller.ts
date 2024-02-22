@@ -3,13 +3,12 @@ import { NextFunction, Request, Response } from "express";
 import { MailService } from "../service/mail.service";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
+import { TransporterService } from "../service/transporter.service";
 
 export class MailController {
-  public static async sendMail(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
+  constructor(private _mailService: MailService) {}
+
+  public async sendMail(req: Request, res: Response, next: NextFunction) {
     // Check incoming request body to fit the shape of model (sendMailRequestBodyModel)
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
@@ -22,7 +21,7 @@ export class MailController {
     }
 
     // Create or return instance of MailService singleton and call sendMail method on it
-    const sendMailResult = await MailService.getInstance().sendMail(
+    const sendMailResult = await this._mailService.sendMail(
       validationResult.data
     );
 

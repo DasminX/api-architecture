@@ -1,10 +1,6 @@
-import { createTransport, Transporter } from "nodemailer";
 import { SendMailRequestBodyModelT } from "../model/sendMailRequestBody.model";
 import { SendMailResponseT } from "../types/sendMailResponse";
-import {
-  TransporterService,
-  transporterServiceInstance,
-} from "./transporter.service";
+import { TransporterService } from "./transporter.service";
 
 // Interface for MailService - when testing, just make an object like this interface and substitute.
 export interface IMailService {
@@ -33,8 +29,6 @@ export class MailService implements IMailService {
     }
   }
 }
-
-export const mailServiceInstance = new MailService(transporterServiceInstance);
 
 /* Considerations */
 // You can still think how you can more isolate the service that sends emails (MailService class) from the functions, objects, methods associated with the Nodemailer itself.
