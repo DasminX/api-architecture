@@ -1,11 +1,12 @@
-import { MailController } from "./features/mail/controller/mail.controller";
+import { NodemailerController } from "./features/mail/controller/mail.controller";
 import { MailRoute } from "./features/mail/route/mail.route";
-import { MailService } from "./features/mail/service/mail.service";
-import { TransporterService } from "./features/mail/service/transporter.service";
+import { NodemailerService } from "./features/mail/service/mail/concrete-nodemailer";
 
+/* TODO: other dependencies based on NODE_ENV/other things? */
 export const getMailRouteAndInjectDependencies = (): MailRoute => {
-  const transporterService = new TransporterService();
-  const mailSerivice = new MailService(transporterService);
-  const mailController = new MailController(mailSerivice);
-  return new MailRoute(mailController);
+  const mailService = new NodemailerService();
+  const mailController = new NodemailerController(mailService);
+  const mailRoute = new MailRoute(mailController);
+
+  return mailRoute;
 };

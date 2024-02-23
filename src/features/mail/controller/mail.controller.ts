@@ -1,8 +1,8 @@
 import { AppError } from "../../../errors/appError";
 import { NextFunction, Request, Response } from "express";
-import { MailService } from "../service/mail.service";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
+import { NodemailerService } from "../service/mail/concrete-nodemailer";
 
 export interface MailControllerI {
   sendMail(
@@ -12,10 +12,11 @@ export interface MailControllerI {
   ): Promise<void | Response>;
 }
 
-export class MailController implements MailControllerI {
-  constructor(private readonly _mailService: MailService) {}
+export class NodemailerController implements MailControllerI {
+  constructor(private readonly _mailService: NodemailerService) {}
 
-  public async sendMail(req: Request, res: Response, next: NextFunction) {
+  /* Arrow function method - workaround in losing "this" context when it's called */
+  public sendMail = async (req: Request, res: Response, next: NextFunction) => {
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
     if (!validationResult.success) {
@@ -31,10 +32,11 @@ export class MailController implements MailControllerI {
 
     // Error in nodemailer
     if (!sendMailResult.success) {
+      sendMailResult;
       return next(new AppError(sendMailResult.error, 500));
       /* TODO: InternalError, MailError ? */
     }
 
     return res.json(sendMailResult);
-  }
+  };
 }

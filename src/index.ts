@@ -6,27 +6,22 @@ import compression from "compression";
 
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
-import { getMailRouteAndInjectDependencies } from "./dependencies";
+import { MailRoute } from "./features/mail/route/mail.route";
 
 export class App {
-  private readonly _app;
+  public readonly app;
 
-  constructor() {
-    this._app = express();
-
+  constructor(private readonly _mailRoute: MailRoute) {
+    this.app = express();
     this._setProtection();
     this._setLogger();
     this._setRequestRelatedOpts();
     this._setHandlers();
   }
 
-  public get app() {
-    return this._app;
-  }
-
   private _setProtection() {
-    this._app.options("*", cors());
-    this._app.use(helmet());
+    this.app.options("*", cors());
+    this.app.use(helmet());
   }
 
   private _setLogger() {
@@ -34,24 +29,24 @@ export class App {
     if (process.env.NODE_ENV === "development") {
       morganMode = "dev";
     }
-    this._app.use(morgan(morganMode));
+    this.app.use(morgan(morganMode));
   }
 
   private _setRequestRelatedOpts() {
-    this._app.use(express.json({ limit: "10kb" }));
-    this._app.use(
+    this.app.use(express.json({ limit: "10kb" }));
+    this.app.use(
       express.urlencoded({
         extended: true,
       })
     );
-    this._app.use(compression());
+    this.app.use(compression());
   }
 
   private _setHandlers() {
-    this._app.use("/api/mail", getMailRouteAndInjectDependencies().router);
+    this.app.use("/api/mail", this._mailRoute.router);
 
-    this._app.all("*", notFoundController);
+    this.app.all("*", notFoundController);
 
-    this._app.use(errorController);
+    this.app.use(errorController);
   }
 }
