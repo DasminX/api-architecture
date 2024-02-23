@@ -1,22 +1,20 @@
 import { describe, it, expect } from "vitest";
-import { IMailService } from "../service/mail/concrete-nodemailer";
-import {
-  sendMailRequestBodyModel,
-  SendMailRequestBodyModelT,
-} from "../model/sendMailRequestBody.model";
-import { SendMailResponseT } from "../types/sendMailResponse";
+
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { ZodError } from "zod";
+import { MailOptions, MailServiceI } from "../service/mail/abstraction";
+import {
+  SendMailResponse,
+  SendMailResponseFail,
+} from "../service/mail/responses";
+import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 
-// We're fixing the service - of course it should never return {success: true}, but this is just for a silly illustration of how much
-// it helps to create an interface for testing.
-// Of course, we should make different scenarios in it, when it should crash and when it should work.
-class MockMailService implements IMailService {
-  public sendMail(
-    credentials: SendMailRequestBodyModelT
-  ): Promise<SendMailResponseT> {
+class MockMailService extends MailServiceI<any> {
+  protected createTransport() {}
+
+  sendMail(options: MailOptions): Promise<SendMailResponse> {
     try {
-      sendMailRequestBodyModel.parse(credentials);
+      sendMailRequestBodyModel.parse(options);
       return Promise.resolve({ success: true });
     } catch (e) {
       return Promise.reject({
@@ -28,7 +26,6 @@ class MockMailService implements IMailService {
 }
 
 /* TODO, custom transporter deliverable to mail service (for testing and development and prod environments) */
-
 const mockMailService = new MockMailService();
 
 // Dummy test
@@ -56,7 +53,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseT;
+      const sendMailResponseError = e as SendMailResponseFail;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
@@ -75,7 +72,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseT;
+      const sendMailResponseError = e as SendMailResponseFail;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
@@ -95,7 +92,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseT;
+      const sendMailResponseError = e as SendMailResponseFail;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
