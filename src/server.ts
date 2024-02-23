@@ -1,7 +1,6 @@
-import path from "path";
-import { App } from ".";
 import { loadEnvFile } from "./loadEnvFile";
 import { getMailRouteAndInjectDependencies } from "./dependencies";
+import { App } from "./app";
 
 (() => {
   process.on("uncaughtException", (err) => {
