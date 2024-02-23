@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import path from "path";
 import { App } from ".";
+import { loadEnvFile } from "./loadEnvFile";
 
 (() => {
   process.on("uncaughtException", (err) => {
@@ -10,11 +11,11 @@ import { App } from ".";
   });
 
   // Nothing in .env, just mocking...
-  dotenv.config({ path: path.join(process.cwd(), ".env") });
-
-  const port = process.env.PORT || 3000;
+  loadEnvFile(path.join(process.cwd(), ".env"));
 
   const { app } = new App();
+
+  const port = process.env.PORT || 3000;
 
   const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`);
