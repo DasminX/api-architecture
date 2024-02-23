@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { IMailService } from "../service/mail/concrete";
+import { IMailService } from "../service/mail/concrete-nodemailer";
 import {
   sendMailRequestBodyModel,
   SendMailRequestBodyModelT,
