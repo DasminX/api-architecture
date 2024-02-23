@@ -1,6 +1,6 @@
 import { AppError } from "../../../errors/appError";
 import { NextFunction, Request, Response } from "express";
-import { MailService } from "../service/mail.service";
+import { MailService } from "../service/mail/concrete";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 

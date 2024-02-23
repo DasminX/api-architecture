@@ -4,15 +4,14 @@ import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
-import mailRoute from "./dependencies";
-
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
+import { MailRoute } from "./features/mail/route/mail.route";
 
 export class App {
   private readonly _app;
 
-  constructor() {
+  constructor(private readonly _mailRoute: MailRoute) {
     this._app = express();
 
     this._setProtection();
@@ -49,7 +48,7 @@ export class App {
   }
 
   private _setHandlers() {
-    this._app.use("/api/mail", mailRoute.router);
+    this._app.use("/api/mail", this._mailRoute.router);
 
     this._app.all("*", notFoundController);
 

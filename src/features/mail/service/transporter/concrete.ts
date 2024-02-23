@@ -1,9 +1,15 @@
 import { Transporter, createTransport } from "nodemailer";
 
-export class TransporterService {
+export abstract class TransporterServiceI<T extends any> {
+  protected _createTransport(): T {
+    throw new Error("Not implemented!");
+  }
+}
+
+export class TransporterService extends TransporterServiceI<Transporter> {
   public transporter: Transporter = this._createTransport();
 
-  private _createTransport() {
+  protected _createTransport() {
     return createTransport({
       host: "random-host",
       port: 1234,

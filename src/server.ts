@@ -1,7 +1,7 @@
-import dotenv from "dotenv";
 import path from "path";
 import { App } from ".";
 import { loadEnvFile } from "./loadEnvFile";
+import { getMailRouteAndInjectDependencies } from "./dependencies";
 
 (() => {
   process.on("uncaughtException", (err) => {
@@ -13,10 +13,9 @@ import { loadEnvFile } from "./loadEnvFile";
   // Nothing in .env, just mocking...
   loadEnvFile(path.join(process.cwd(), ".env"));
 
-  const { app } = new App();
+  const { app } = new App(getMailRouteAndInjectDependencies());
 
   const port = process.env.PORT || 3000;
-
   const server = app.listen(port, () => {
     console.log(`App running on port ${port}...`);
   });

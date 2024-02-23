@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { IMailService } from "../service/mail.service";
+import { IMailService } from "../service/mail/concrete";
 import {
   sendMailRequestBodyModel,
   SendMailRequestBodyModelT,
