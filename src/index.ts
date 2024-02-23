@@ -4,10 +4,9 @@ import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
-import mailRoute from "./dependencies";
-
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
+import { getMailRouteAndInjectDependencies } from "./dependencies";
 
 export class App {
   private readonly _app;
@@ -49,7 +48,7 @@ export class App {
   }
 
   private _setHandlers() {
-    this._app.use("/api/mail", mailRoute.router);
+    this._app.use("/api/mail", getMailRouteAndInjectDependencies().router);
 
     this._app.all("*", notFoundController);
 
