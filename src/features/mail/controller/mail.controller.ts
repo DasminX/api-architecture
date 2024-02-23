@@ -4,14 +4,20 @@ import { MailService } from "../service/mail.service";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 
-export class MailController {
+export interface MailControllerI {
+  sendMail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void | Response>;
+}
+
+export class MailController implements MailControllerI {
   constructor(private readonly _mailService: MailService) {}
 
   public async sendMail(req: Request, res: Response, next: NextFunction) {
-    // Check incoming request body to fit the shape of model (sendMailRequestBodyModel)
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
-    // Request body doesn't fit shape of Zod object
     if (!validationResult.success) {
       return next(
         new AppError(formatZodErrorIssues(validationResult.error.issues), 400)
@@ -19,7 +25,6 @@ export class MailController {
       /* TODO: consider AppError instances, e.g. ValidationError extends AppError... */
     }
 
-    // Create or return instance of MailService singleton and call sendMail method on it
     const sendMailResult = await this._mailService.sendMail(
       validationResult.data
     );
@@ -33,8 +38,3 @@ export class MailController {
     return res.json(sendMailResult);
   }
 }
-
-/* Considerations */
-// You could check if it is somehow possible to make it so that you get mailService as a function parameter, so that the code does not strictly depend on the MailService class,
-// but was injected through the constructor (Once again, Dependency Injection and Inversion of Control are at odds),
-// which would greatly simplify testing

@@ -1,10 +1,10 @@
 import express, { Router } from "express";
-import { MailController } from "../controller/mail.controller";
+import { type MailControllerI } from "../controller/mail.controller";
 
 export class MailRoute {
   private _router: Router;
 
-  constructor(private readonly _mailController: MailController) {
+  constructor(private readonly _mailController: MailControllerI) {
     this._router = express.Router();
     this._applyRoutesHandlers();
   }
