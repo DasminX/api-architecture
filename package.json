@@ -17,7 +17,8 @@
     "docker:build": "docker image build -t api-architecture .",
     "docker:start": "docker container run -p 3000:3000 --name api-architecture-cont api-architecture",
     "docker:test": "docker container run --rm -p 3000:3000 api-architecture sh -c \"npm run test\"",
-    "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont"
+    "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont",
+    "docker:restart": "npm run docker:destroy | npm run docker:start"
   },
   "dependencies": {
     "compression": "^1.7.4",

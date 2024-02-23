@@ -10,7 +10,6 @@ export class NodemailerService extends MailServiceI<Transporter> {
   public readonly transporter: Transporter = this.createTransport();
 
   protected createTransport() {
-    console.log("wchodzi");
     return createTransport({
       host: "random-host",
       port: 1234,

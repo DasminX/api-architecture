@@ -15,7 +15,8 @@ export interface MailControllerI {
 export class NodemailerController implements MailControllerI {
   constructor(private readonly _mailService: NodemailerService) {}
 
-  public async sendMail(req: Request, res: Response, next: NextFunction) {
+  /* Arrow function method - workaround in losing "this" context when it's called */
+  public sendMail = async (req: Request, res: Response, next: NextFunction) => {
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
     if (!validationResult.success) {
@@ -37,5 +38,5 @@ export class NodemailerController implements MailControllerI {
     }
 
     return res.json(sendMailResult);
-  }
+  };
 }
