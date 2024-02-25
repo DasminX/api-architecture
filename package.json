@@ -8,16 +8,16 @@
   "version": "1.0",
   "main": "./src/server.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "NODE_ENV=production node ./dist/server.js",
-    "start:prod": "npm cache clean --force && npm run build && npm run start",
-    "start:dev": "nodemon --legacy-watch ./src/server.ts",
-    "test": "vitest run --dir ./src",
-    "test:watch": "vitest watch --dir ./src",
+    "start:prod": "npm cache clean --force && tsc && NODE_ENV=production node ./dist/server.js",
     "docker:build": "docker image build -t api-architecture .",
     "docker:start": "docker container run -p 3000:3000 --name api-architecture-cont api-architecture",
-    "docker:test": "docker container run --rm -p 3000:3000 api-architecture sh -c \"npm run test\"",
-    "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont"
+    "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont",
+    "start:dev": "nodemon --legacy-watch ./src/server.ts",
+    "docker:dev-up": "docker compose up",
+    "docker:dev-down": "docker compose down -v",
+    "test": "vitest run --dir ./src",
+    "test:watch": "vitest watch --dir ./src",
+    "docker:test": "docker container run --rm -p 3000:3000 api-architecture sh -c \"npm run test\""
   },
   "dependencies": {
     "awilix": "^10.0.1",
