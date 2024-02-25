@@ -4,7 +4,7 @@
 
 I have to admit, that I'm pretty new in considerations about architecture, but I'm really into it!
 
-I've made this project to show how I would build such project, using seperation of concerns, DRY principle, clean-coding and Object Oriented Paradigm etc.
+I've made this project to show how I would build such project, using seperation of concerns, DRY principle, clean-coding, Dependency Injection, Object Oriented Paradigm and more.
 
 So far, everything I've learned about Node, Express, Docker, OOP, React, Next, testing, design patterns, architecture, databases and many, many more, I've learned it by myself. I'm so proud of it!
 
