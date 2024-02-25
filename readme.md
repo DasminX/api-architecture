@@ -60,6 +60,7 @@ cd api-architecture
 
 #### Using docker
 
+**For production use:**
 1. Create an image
 
     ```
@@ -84,7 +85,27 @@ cd api-architecture
 
     ```
 
+**For devel use:**
+
+1. Run compose up
+
+    ```
+
+    npm run docker:dev-up
+
+    ```
+
+2. After the development, run compose down
+
+    ```
+
+    npm run docker:dev-down
+
+    ```
+
 #### On local machine
+
+**For production use:**
 
 1. Install packages
 
@@ -94,7 +115,25 @@ cd api-architecture
 
     ```
 
-2. Run development script
+2. Run production script
+
+    ```
+
+    npm run start:prod
+
+    ```
+
+**For devel use:**
+
+1. Install packages
+
+    ```
+
+    npm i
+
+    ```
+
+2. Run devel script
 
     ```
 
