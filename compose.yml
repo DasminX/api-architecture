@@ -1,0 +1,14 @@
+name: api-architecture
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run start:dev
+    volumes:
+      - .:/app/src
+      - /app/src/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development

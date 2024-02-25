@@ -3,20 +3,30 @@ import { NextFunction, Request, Response } from "express";
 import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { NodemailerService } from "../service/mail/concrete-nodemailer";
+import { MailServiceI } from "../service/mail/abstraction";
 
-export interface MailControllerI {
-  sendMail(
+export abstract class MailControllerI {
+  protected readonly mailService: MailServiceI<any>;
+
+  constructor({ mailService }: { mailService: MailServiceI<any> }) {
+    this.mailService = mailService;
+  }
+
+  public abstract sendMail(
     req: Request,
     res: Response,
     next: NextFunction
   ): Promise<void | Response>;
 }
 
-export class NodemailerController implements MailControllerI {
-  constructor(private readonly _mailService: NodemailerService) {}
+export class NodemailerController extends MailControllerI {
+  constructor({ mailService }: { mailService: NodemailerService }) {
+    super({ mailService });
+  }
 
   /* Arrow function method - workaround in losing "this" context when it's called */
   public sendMail = async (req: Request, res: Response, next: NextFunction) => {
+    /* TODO: inject model into Awilix, also take it somewhere else to make controller clean */
     const validationResult = sendMailRequestBodyModel.safeParse(req.body);
 
     if (!validationResult.success) {
@@ -26,7 +36,7 @@ export class NodemailerController implements MailControllerI {
       /* TODO: consider AppError instances, e.g. ValidationError extends AppError... */
     }
 
-    const sendMailResult = await this._mailService.sendMail(
+    const sendMailResult = await this.mailService.sendMail(
       validationResult.data
     );
 

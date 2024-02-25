@@ -11,7 +11,7 @@ import { MailRoute } from "./features/mail/route/mail.route";
 export class App {
   public readonly app;
 
-  constructor(private readonly _mailRoute: MailRoute) {
+  constructor(private readonly mailRoute: MailRoute) {
     this.app = express();
     this._setProtection();
     this._setLogger();
@@ -43,7 +43,7 @@ export class App {
   }
 
   private _setHandlers() {
-    this.app.use("/api/mail", this._mailRoute.router);
+    this.app.use("/api/mail", this.mailRoute.router);
 
     this.app.all("*", notFoundController);
 

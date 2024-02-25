@@ -1,18 +1,19 @@
 import { loadEnvFile } from "./loadEnvFile";
-import { getMailRouteAndInjectDependencies } from "./dependencies";
 import { App } from "./app";
+import { createAwilixContainer } from "./container";
 
 (() => {
+  const container = createAwilixContainer();
+
+  loadEnvFile(); // Nothing in .env, just mocking...
+
   process.on("uncaughtException", (err) => {
     console.log(err.name, err.message);
     console.log(`UNCAUGHT EXCEPTION! Shutting down...`);
     process.exit(1);
   });
 
-  // Nothing in .env, just mocking...
-  loadEnvFile();
-
-  const { app } = new App(getMailRouteAndInjectDependencies());
+  const { app } = new App(container.cradle.mailRoute);
 
   const port = process.env.PORT || 3000;
   const server = app.listen(port, () => {
