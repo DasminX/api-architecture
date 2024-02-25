@@ -20,7 +20,7 @@ It may change over time!
 
 ---
 
-### For now, there are 4 active branches
+### For now, there are such active branches
 
 1. **1_first_architecture** - basic branch without Dependency Injection - mostly related on functions and concrete class instances - first basic app shape.
 
@@ -28,7 +28,9 @@ It may change over time!
 
 3. **3_dep_inj_adv** - third branch - basing on second branch, but cleaned up - added more abstractions, wrapped up too much granulated things into more reasonable shape, fixed some errors, made it all injectable in a runtime!
 
-4. **master** - it is the most stable version of the most recent branch. For now, it reflects **third branch**, but it may be different in the ***future***
+4. **4_awilix** - fourth branch, refactored manual setting up Dependency Injection to IoC Container (Awilix), added docker compose, changed npm scripts, fixed some issues. **Still in progress**
+
+5. **master** - it is the most stable version of the most recent branch. For now, it reflects **fourth branch**, but it may be different in the ***future***
 
 **NOTE: It's not the end! I'm aware of many things to be fixed, to be done more reasonable and human-readable, so to say.**
 
