@@ -1,9 +1,9 @@
 import { AppError } from "../../../errors/appError";
 import { NextFunction, Request, Response } from "express";
-import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { NodemailerService } from "../service/mail/concrete-nodemailer";
 import { MailServiceI } from "../service/mail/abstraction";
+import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
 
 export abstract class MailControllerI {
   protected readonly mailService: MailServiceI<any>;
@@ -27,7 +27,7 @@ export class NodemailerController extends MailControllerI {
   /* Arrow function method - workaround in losing "this" context when it's called */
   public sendMail = async (req: Request, res: Response, next: NextFunction) => {
     /* TODO: inject model into Awilix, also take it somewhere else to make controller clean */
-    const validationResult = sendMailRequestBodyModel.safeParse(req.body);
+    const validationResult = sendMailRequestBody.safeParse(req.body);
 
     if (!validationResult.success) {
       return next(

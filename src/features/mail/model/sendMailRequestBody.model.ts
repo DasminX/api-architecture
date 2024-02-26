@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Shape of send-mail request body
-export const sendMailRequestBodyModel = z
+export const sendMailRequestBody = z
   .object({
     sender: z.string().email(),
     content: z.string().min(30, {
@@ -13,6 +13,4 @@ export const sendMailRequestBodyModel = z
 // Strict ensures it accepts only these properties and nothing more or less
 
 // Type based on Zod object
-export type SendMailRequestBodyModelT = z.infer<
-  typeof sendMailRequestBodyModel
->;
+export type SendMailRequestBodyT = z.infer<typeof sendMailRequestBody>;
