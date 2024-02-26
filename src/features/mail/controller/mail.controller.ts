@@ -4,6 +4,7 @@ import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssu
 import { NodemailerService } from "../service/mail/concrete-nodemailer";
 import { MailServiceI } from "../service/mail/abstraction";
 import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
+import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 
 export abstract class MailControllerI {
   protected readonly mailService: MailServiceI<any>;
@@ -26,27 +27,20 @@ export class NodemailerController extends MailControllerI {
 
   /* Arrow function method - workaround in losing "this" context when it's called */
   public sendMail = async (req: Request, res: Response, next: NextFunction) => {
-    /* TODO: inject model into Awilix, also take it somewhere else to make controller clean */
-    const validationResult = sendMailRequestBody.safeParse(req.body);
+    try {
+      const credentials = parseZodObjectOrThrow(sendMailRequestBody, req.body);
 
-    if (!validationResult.success) {
-      return next(
-        new AppError(formatZodErrorIssues(validationResult.error.issues), 400)
-      );
-      /* TODO: consider AppError instances, e.g. ValidationError extends AppError... */
+      const sendMailResult = await this.mailService.sendMail(credentials);
+
+      // Error in nodemailer
+      if (!sendMailResult.success) {
+        return next(new AppError(sendMailResult.error, 500));
+        /* TODO: InternalError, MailError ? */
+      }
+
+      return res.json(sendMailResult);
+    } catch (err) {
+      return next(err);
     }
-
-    const sendMailResult = await this.mailService.sendMail(
-      validationResult.data
-    );
-
-    // Error in nodemailer
-    if (!sendMailResult.success) {
-      sendMailResult;
-      return next(new AppError(sendMailResult.error, 500));
-      /* TODO: InternalError, MailError ? */
-    }
-
-    return res.json(sendMailResult);
   };
 }
