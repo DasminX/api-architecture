@@ -7,6 +7,7 @@ import {
 import { MailRoute } from "./features/mail/route/mail.route";
 import { NodemailerController } from "./features/mail/controller/mail.controller";
 import { NodemailerService } from "./features/mail/service/mail/concrete-nodemailer";
+import { App } from "./app";
 
 export const createAwilixContainer = (): AwilixContainer => {
   const container = createContainer({
@@ -17,6 +18,7 @@ export const createAwilixContainer = (): AwilixContainer => {
     mailService: asClass(NodemailerService).singleton(),
     mailController: asClass(NodemailerController).singleton(),
     mailRoute: asClass(MailRoute).singleton(),
+    appEntry: asClass(App).singleton(),
   });
 
   return container;

@@ -10,8 +10,11 @@ import { MailRoute } from "./features/mail/route/mail.route";
 
 export class App {
   public readonly app;
+  private readonly mailRoute: MailRoute;
 
-  constructor(private readonly mailRoute: MailRoute) {
+  constructor({ mailRoute }: { mailRoute: MailRoute }) {
+    this.mailRoute = mailRoute;
+
     this.app = express();
     this._setProtection();
     this._setLogger();
