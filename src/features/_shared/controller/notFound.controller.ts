@@ -1,10 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import { AppError } from "../../../errors/appError";
+import { NotFoundError } from "../../../errors/appError";
+import { ExpressHandlerType } from "../types";
 
-export const notFoundController = (
-  req: Request,
-  _res: Response,
-  next: NextFunction
-) => {
-  next(new AppError(`${req.originalUrl} not found!`, 404));
+export const notFoundController: ExpressHandlerType = (req, _res, next) => {
+  next(new NotFoundError(`${req.originalUrl} not found!`));
 };

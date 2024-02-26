@@ -6,8 +6,9 @@ export class MailRoute {
   private readonly mailController: MailControllerI;
 
   constructor({ mailController }: { mailController: MailControllerI }) {
-    this.router = express.Router();
     this.mailController = mailController;
+
+    this.router = express.Router();
     this._applyRoutesHandlers();
   }
 

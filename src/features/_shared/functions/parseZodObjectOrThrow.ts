@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { ZodObject, ZodRawShape } from "zod";
 import { formatZodErrorIssues } from "./formatZodErrorIssues";
-import { AppError } from "../../../errors/appError";
+import { ValidationError } from "../../../errors/appError";
 
 export const parseZodObjectOrThrow = <T extends ZodRawShape>(
   schema: ZodObject<T, "passthrough" | "strict" | "strip">,
@@ -12,5 +12,5 @@ export const parseZodObjectOrThrow = <T extends ZodRawShape>(
     return parseResult.data;
   }
 
-  throw new AppError(formatZodErrorIssues(parseResult.error.issues), 400);
+  throw new ValidationError(formatZodErrorIssues(parseResult.error.issues));
 };

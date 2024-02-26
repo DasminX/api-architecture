@@ -1,10 +1,9 @@
-import { AppError } from "../../../errors/appError";
-import { NextFunction, Request, Response } from "express";
-import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
+import { InternalError } from "../../../errors/appError";
 import { NodemailerService } from "../service/mail/concrete-nodemailer";
 import { MailServiceI } from "../service/mail/abstraction";
 import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
+import { ExpressHandlerType } from "../../_shared/types";
 
 export abstract class MailControllerI {
   protected readonly mailService: MailServiceI<any>;
@@ -13,11 +12,7 @@ export abstract class MailControllerI {
     this.mailService = mailService;
   }
 
-  public abstract sendMail(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void | Response>;
+  public abstract sendMail: ExpressHandlerType;
 }
 
 export class NodemailerController extends MailControllerI {
@@ -26,16 +21,14 @@ export class NodemailerController extends MailControllerI {
   }
 
   /* Arrow function method - workaround in losing "this" context when it's called */
-  public sendMail = async (req: Request, res: Response, next: NextFunction) => {
+  public sendMail: ExpressHandlerType = async (req, res, next) => {
     try {
       const credentials = parseZodObjectOrThrow(sendMailRequestBody, req.body);
 
       const sendMailResult = await this.mailService.sendMail(credentials);
 
-      // Error in nodemailer
       if (!sendMailResult.success) {
-        return next(new AppError(sendMailResult.error, 500));
-        /* TODO: InternalError, MailError ? */
+        throw new InternalError(sendMailResult.error); // Error in nodemailer
       }
 
       return res.json(sendMailResult);
