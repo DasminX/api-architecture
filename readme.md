@@ -38,7 +38,6 @@ It may change over time!
 
 - I'd like to implement my own mail server, which "talks" with this backend (using docker things, such compose etc.)
 - I defenitely will create development and production builds seperately (maybe runtime variables also?), which also comes with creating more class instances based on current classes (woohooo, more OOP!!)
-- I will consider using IOC container (Awilix, Inversify?) - will see
 - I certainly must focus more on tests - I'm a novice in this - some refactorings? more tests? Soon :)
 - Also, when it grows, I will add more and more features
 
