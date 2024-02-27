@@ -13,4 +13,5 @@ export const sendMailRequestBody = z
 // Strict ensures it accepts only these properties and nothing more or less
 
 // Type based on Zod object
-export type SendMailRequestBodyT = z.infer<typeof sendMailRequestBody>;
+export type sendMailRequestBodyT = typeof sendMailRequestBody;
+export type SendMailRequestBodyTInfer = z.infer<typeof sendMailRequestBody>;

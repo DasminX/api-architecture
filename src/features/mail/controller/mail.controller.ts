@@ -1,9 +1,13 @@
 import { InternalError } from "../../../errors/appError";
 import { NodemailerService } from "../service/mail/concrete-nodemailer";
 import { MailServiceI } from "../service/mail/abstraction";
-import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 import { ExpressHandlerType } from "../../_shared/types";
+import {
+  SendMailRequestBodyTInfer,
+  sendMailRequestBodyT,
+} from "../model/sendMailRequestBody.model";
+import { SendMailResponse } from "../service/mail/responses";
 
 export abstract class MailControllerI {
   protected readonly mailService: MailServiceI<any>;
@@ -16,16 +20,29 @@ export abstract class MailControllerI {
 }
 
 export class NodemailerController extends MailControllerI {
-  constructor({ mailService }: { mailService: NodemailerService }) {
+  private readonly sendMailRequestBody: sendMailRequestBodyT;
+  constructor({
+    mailService,
+    sendMailRequestBody,
+  }: {
+    mailService: NodemailerService;
+    sendMailRequestBody: sendMailRequestBodyT;
+  }) {
     super({ mailService });
+    this.sendMailRequestBody = sendMailRequestBody;
   }
 
   /* Arrow function method - workaround in losing "this" context when it's called */
   public sendMail: ExpressHandlerType = async (req, res, next) => {
     try {
-      const credentials = parseZodObjectOrThrow(sendMailRequestBody, req.body);
+      const credentials: SendMailRequestBodyTInfer = parseZodObjectOrThrow(
+        this.sendMailRequestBody,
+        req.body
+      );
 
-      const sendMailResult = await this.mailService.sendMail(credentials);
+      const sendMailResult: SendMailResponse = await this.mailService.sendMail(
+        credentials
+      );
 
       if (!sendMailResult.success) {
         throw new InternalError(sendMailResult.error); // Error in nodemailer
