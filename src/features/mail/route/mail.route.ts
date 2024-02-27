@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { type MailControllerI } from "../controller/mail.controller";
+import { MailControllerI } from "../controller/abstraction";
 
 export class MailRoute {
   public readonly router: Router;

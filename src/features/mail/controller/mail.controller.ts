@@ -1,6 +1,5 @@
-import { InternalError } from "../../../errors/appError";
-import { NodemailerService } from "../service/mail/concrete-nodemailer";
-import { MailServiceI } from "../service/mail/abstraction";
+import { InternalError } from "../../../errors";
+import { NodemailerService } from "../service/mail/nodemailer.service";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 import { ExpressHandlerType } from "../../_shared/types";
 import {
@@ -8,16 +7,7 @@ import {
   sendMailRequestBodyT,
 } from "../model/sendMailRequestBody.model";
 import { SendMailResponse } from "../service/mail/responses";
-
-export abstract class MailControllerI {
-  protected readonly mailService: MailServiceI<any>;
-
-  constructor({ mailService }: { mailService: MailServiceI<any> }) {
-    this.mailService = mailService;
-  }
-
-  public abstract sendMail: ExpressHandlerType;
-}
+import { MailControllerI } from "./abstraction";
 
 export class NodemailerController extends MailControllerI {
   private readonly sendMailRequestBody: sendMailRequestBodyT;

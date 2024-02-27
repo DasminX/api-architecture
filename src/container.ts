@@ -7,7 +7,7 @@ import {
 } from "awilix";
 import { MailRoute } from "./features/mail/route/mail.route";
 import { NodemailerController } from "./features/mail/controller/mail.controller";
-import { NodemailerService } from "./features/mail/service/mail/concrete-nodemailer";
+import { NodemailerService } from "./features/mail/service/mail/nodemailer.service";
 import { sendMailRequestBody } from "./features/mail/model/sendMailRequestBody.model";
 import { App } from "./app";
 
