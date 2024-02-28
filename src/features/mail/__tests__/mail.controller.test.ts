@@ -7,14 +7,14 @@ import {
   SendMailResponse,
   SendMailResponseFail,
 } from "../service/mail/responses";
-import { sendMailRequestBodyModel } from "../model/sendMailRequestBody.model";
+import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
 
 class MockMailService extends MailServiceI<any> {
   protected createTransport() {}
 
   sendMail(options: MailOptions): Promise<SendMailResponse> {
     try {
-      sendMailRequestBodyModel.parse(options);
+      sendMailRequestBody.parse(options);
       return Promise.resolve({ success: true });
     } catch (e) {
       return Promise.reject({
