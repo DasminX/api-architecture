@@ -1,16 +1,17 @@
 version: "3.8"
 name: api-architecture
 services:
-  mail:
+  mailcatcher:
     restart: on-failure
     image: dockage/mailcatcher:0.9.0
     ports:
       - "1080:1080"
       - "1025:1025"
+
   api:
     build:
       context: .
-      dockerfile: backend.Dockerfile
+      dockerfile: Dockerfile
     command: npm run start:dev
     volumes:
       - .:/usr/app
@@ -19,4 +20,4 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
-    depends_on: ["mail"]
+    depends_on: ["mailcatcher"]

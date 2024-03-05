@@ -11,13 +11,9 @@ export class NodemailerService extends MailServiceI<Transporter> {
 
   protected createTransport() {
     return createTransport({
-      host: "random-host",
-      port: 1234,
-      secure: true,
-      auth: {
-        user: "some-user",
-        pass: "some-password",
-      },
+      host: "mailcatcher",
+      port: 1025,
+      secure: false,
     });
   }
 
@@ -25,7 +21,7 @@ export class NodemailerService extends MailServiceI<Transporter> {
     try {
       await this.transporter.sendMail({
         from: options.sender,
-        to: "host-mail@exampleabc.com",
+        to: "test.receiver@mailcatcher.xd",
         subject: options.subject,
         text: options.content,
       });
