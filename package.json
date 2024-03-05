@@ -13,8 +13,6 @@
     "docker:start": "docker container run -p 3000:3000 --name api-architecture-cont api-architecture",
     "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont",
     "start:dev": "nodemon --legacy-watch ./src/server.ts",
-    "docker:dev-up": "docker compose up",
-    "docker:dev-down": "docker compose down -v",
     "test": "vitest run --dir ./src",
     "test:watch": "vitest watch --dir ./src",
     "docker:test": "docker container run --rm -p 3000:3000 api-architecture sh -c \"npm run test\""
