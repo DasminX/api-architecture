@@ -28,31 +28,35 @@ It may change over time!
 
 3. **3_dep_inj_adv** - third branch - basing on second branch, but cleaned up - added more abstractions, wrapped up too much granulated things into more reasonable shape, fixed some errors, made it all injectable in a runtime!
 
-4. **4_awilix** - fourth branch, refactored manual setting up Dependency Injection to IoC Container (Awilix), added docker compose, changed npm scripts, fixed some issues. **Still in progress**
+4. **4_awilix** - fourth branch, refactored manual setting up Dependency Injection to IoC Container (Awilix), added docker compose file, changed npm scripts, fixed some issues.
 
-5. **master** - it is the most stable version of the most recent branch. For now, it reflects **fourth branch**, but it may be different in the ***future***
+5. **5_simple_smtp** - fifth branch - successfully added simple mail-catching service, glued up with Docker compose file. For now, it's possible to read sent mails! Of course I'm aware that it's a reeaaaallly simple demo but it was a nice experience to check some available mail services, try few ones, read about them and finally choose one! There, of course, is a field to improve it more and more :) ***Still in progress***
+
+6. **master** - it is the most stable version of the most recent branch. For now, it reflects **5_simple_smtp** branch, but it may be different in the ***future***
 
 **NOTE: It's not the end! I'm aware of many things to be fixed, to be done more reasonable and human-readable, so to say.**
 
 ### Plans for the future
 
-- I'd like to implement my own mail server, which "talks" with this backend (using docker things, such compose etc.)
 - I defenitely will create development and production builds seperately (maybe runtime variables also?), which also comes with creating more class instances based on current classes (woohooo, more OOP!!)
 - I certainly must focus more on tests - I'm a novice in this - some refactorings? more tests? Soon :)
-- Also, when it grows, I will add more and more features
+- Also, I can see possibilities to add other features, like:
+  - Users (registering, logging, sending mails to other users etc? or more granular like auth seperately also? will see)
+  - Movies (adding to favourites, commenting, subscribing for newsletter about new movies? I will also think about it)
+  - other, which I haven't thought about yet :)
 
-**All in the name of science!**
+#### All in the name of self-development!
 
 ---
 
-### How to start it?
+### How to start?
 
 Firstable, run:
 
 ```
 
-git init &&
-git clone 'https://github.com/DasminX/api-architecture.git' &&
+git init
+git clone 'https://github.com/DasminX/api-architecture.git'
 cd api-architecture
 
 ```
@@ -62,7 +66,10 @@ cd api-architecture
 #### Using docker
 
 **For production use:**
-1. Create an image
+
+*Scripts changed since the last publish, not ready yet*
+
+<!-- 1. Create an image
 
     ```
 
@@ -84,7 +91,7 @@ cd api-architecture
 
     npm run docker:destroy
 
-    ```
+    ``` -->
 
 **For devel use:**
 
@@ -92,7 +99,7 @@ cd api-architecture
 
     ```
 
-    npm run docker:dev-up
+    docker compose up
 
     ```
 
@@ -100,13 +107,15 @@ cd api-architecture
 
     ```
 
-    npm run docker:dev-down
+    docker compose down -v
 
     ```
 
 #### On local machine
 
-**For production use:**
+*Scripts changed since the last publish, not ready yet*
+
+<!-- **For production use:**
 
 1. Install packages
 
@@ -140,7 +149,7 @@ cd api-architecture
 
     npm run start:dev
 
-    ```
+    ``` -->
 
 ---
 
@@ -148,19 +157,17 @@ cd api-architecture
 
 When successfully run, you can send API calls to localhost:3000!
 
-1. Send POST Request to localhost:3000/api/mail/send
-2. With object of shape:
+1. Enter <http://localhost:1080>
+2. Send POST Request to <http://localhost:3000/api/mail/send> with a JSON object in shape of:
 
 ```
 
 {
-    "sender": "testmail@example.com",
-    "content": "Test test test test test test test test test test test test",
-    "subject": "Test subject"
+    "sender": "testmail@example.com", // Any mail
+    "content": "Test content with minimum length of 30 letters or more", // Min content length 30
+    "subject": "Test subject" // Min content length 5
 }
 
 ```
 
-**NOTE: Valid credentials don't work yet! One thing you can do is to send invalid credentials!**
-
-## STILL IN PROGRESS!!! MORE SOON
+**NOTE: Valid credentials already work!**
