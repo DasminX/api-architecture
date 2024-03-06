@@ -61,6 +61,14 @@ cd api-architecture
 
 ```
 
+Then, copy .env.dist file to .env file
+
+```
+
+cp .env.dist .env
+
+```
+
 ### Since now, there are two paths
 
 #### Using docker
