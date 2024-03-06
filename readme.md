@@ -61,23 +61,23 @@ cd api-architecture
 
 ```
 
-Then, copy .env.dist file to .env file
+<!-- Then, copy .env.dist file to .env file
 
 ```
 
 cp .env.dist .env
 
-```
+``` -->
 
 ### Since now, there are two paths
 
 #### Using docker
 
-**For production use:**
+<!-- **For production use:** -->
 
-*Scripts changed since the last publish, not ready yet*
+<!-- *Scripts changed since the last publish, not ready yet* -->
 
-<!-- 1. Create an image
+1. Create an image
 
     ```
 
@@ -99,31 +99,13 @@ cp .env.dist .env
 
     npm run docker:destroy
 
-    ``` -->
-
-**For devel use:**
-
-1. Run compose up
-
-    ```
-
-    docker compose up
-
-    ```
-
-2. After the development, run compose down
-
-    ```
-
-    docker compose down -v
-
     ```
 
 #### On local machine
 
-*Scripts changed since the last publish, not ready yet*
+<!-- *Scripts changed since the last publish, not ready yet* -->
 
-<!-- **For production use:**
+**For production use:**
 
 1. Install packages
 
@@ -157,7 +139,7 @@ cp .env.dist .env
 
     npm run start:dev
 
-    ``` -->
+    ```
 
 ---
 
@@ -165,8 +147,8 @@ cp .env.dist .env
 
 When successfully run, you can send API calls to localhost:3000!
 
-1. Enter <http://localhost:1080>
-2. Send POST Request to <http://localhost:3000/api/mail/send> with a JSON object in shape of:
+<!-- 1. Enter <http://localhost:1080> -->
+1. Send POST Request to <http://localhost:3000/api/mail/send> with a JSON object in shape of:
 
 ```
 
@@ -178,4 +160,5 @@ When successfully run, you can send API calls to localhost:3000!
 
 ```
 
-**NOTE: Valid credentials already work!**
+**NOTE: On this stage valid credentials doesn't work yet!**
+<!-- **NOTE: Valid credentials already work!** -->
