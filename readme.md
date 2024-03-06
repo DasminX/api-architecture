@@ -165,8 +165,7 @@ cp .env.dist .env
 
 When successfully run, you can send API calls to localhost:3000!
 
-1. Enter <http://localhost:1080>
-2. Send POST Request to <http://localhost:3000/api/mail/send> with a JSON object in shape of:
+1. Send POST Request to <http://localhost:3000/api/mail/send> with a JSON object in shape of:
 
 ```
 
