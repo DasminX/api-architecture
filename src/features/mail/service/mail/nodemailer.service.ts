@@ -11,8 +11,8 @@ export class NodemailerService extends MailServiceI<Transporter> {
 
   protected createTransport() {
     return createTransport({
-      host: "mailcatcher",
-      port: 1025,
+      host: process.env.NODEMAILER_HOST,
+      port: Number(process.env.NODEMAILER_PORT) || 1025,
       secure: false,
     });
   }
