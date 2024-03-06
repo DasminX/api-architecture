@@ -30,9 +30,11 @@ It may change over time!
 
 4. **4_awilix** - fourth branch, refactored manual setting up Dependency Injection to IoC Container (Awilix), added docker compose file, changed npm scripts, fixed some issues.
 
-5. **5_simple_smtp** - fifth branch - successfully added simple mail-catching service, glued up with Docker compose file. For now, it's possible to read sent mails! Of course I'm aware that it's a reeaaaallly simple demo but it was a nice experience to check some available mail services, try few ones, read about them and finally choose one! There, of course, is a field to improve it more and more :) ***Still in progress***
+5. **5_simple_smtp** - fifth branch - successfully added simple mail-catching service, glued up with Docker compose file. For now, it's possible to read sent mails! Of course I'm aware that it's a reeaaaallly simple demo but it was a nice experience to check some available mail services, try few ones, read about them and finally choose one! There, of course, is a field to improve it more and more :)
 
-6. **master** - it is the most stable version of the most recent branch. For now, it reflects **5_simple_smtp** branch, but it may be different in the ***future***
+6. **6_user_feature** - sixth branch - added basic and working structure of user feature - of course to be extended, fixed in many ways and developed more! ***!Still in progress!***
+
+7. **master** - it is the most stable version of the most recent branch. For now, it reflects **6_user_feature** branch, but it may be different in the ***future***
 
 **NOTE: It's not the end! I'm aware of many things to be fixed, to be done more reasonable and human-readable, so to say.**
 
@@ -177,5 +179,13 @@ When successfully run, you can send API calls to localhost:3000!
 }
 
 ```
+
+**TEMPORARY**
+
+3. Also, for manipulating user-feature demo, you can do such things:
+
+- Send POST Request to <http://localhost:3000/api/user> (create user) - for now, it returns newly created dummy User object (pre-prepared, for now!)
+- Send GET Request to <http://localhost:3000/api/user> (get all users) - for now, it returns an array with one dummy User object included (pre-prepared, for now!)
+- Send GET Request to <http://localhost:3000/api/user/:id> (get user by id) - for now, it returns null (pre-prepared, for now!)
 
 **NOTE: Valid credentials already work!**

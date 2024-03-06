@@ -7,13 +7,22 @@ import compression from "compression";
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
 import { MailRoute } from "./features/mail/route/mail.route";
+import { UserRoute } from "./features/user/route/user.route";
 
 export class App {
   public readonly app;
   private readonly mailRoute: MailRoute;
+  private readonly userRoute: UserRoute;
 
-  constructor({ mailRoute }: { mailRoute: MailRoute }) {
+  constructor({
+    mailRoute,
+    userRoute,
+  }: {
+    mailRoute: MailRoute;
+    userRoute: UserRoute;
+  }) {
     this.mailRoute = mailRoute;
+    this.userRoute = userRoute;
 
     this.app = express();
     this._setProtection();
@@ -47,6 +56,7 @@ export class App {
 
   private _setHandlers() {
     this.app.use("/api/mail", this.mailRoute.router);
+    this.app.use("/api/user", this.userRoute.router);
 
     this.app.all("*", notFoundController);
 
