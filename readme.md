@@ -61,13 +61,13 @@ cd api-architecture
 
 ```
 
-Then, copy .env.dist file to .env file
+<!-- Then, copy .env.dist file to .env file
 
 ```
 
 cp .env.dist .env
 
-```
+``` -->
 
 ### Since now, there are two paths
 
@@ -75,9 +75,9 @@ cp .env.dist .env
 
 **For production use:**
 
-*Scripts changed since the last publish, not ready yet*
+<!-- *Scripts changed since the last publish, not ready yet* -->
 
-<!-- 1. Create an image
+1. Create an image
 
     ```
 
@@ -99,7 +99,7 @@ cp .env.dist .env
 
     npm run docker:destroy
 
-    ``` -->
+    ```
 
 **For devel use:**
 
@@ -121,9 +121,9 @@ cp .env.dist .env
 
 #### On local machine
 
-*Scripts changed since the last publish, not ready yet*
+<!-- *Scripts changed since the last publish, not ready yet* -->
 
-<!-- **For production use:**
+**For production use:**
 
 1. Install packages
 
@@ -157,7 +157,7 @@ cp .env.dist .env
 
     npm run start:dev
 
-    ``` -->
+    ```
 
 ---
 
@@ -178,4 +178,4 @@ When successfully run, you can send API calls to localhost:3000!
 
 ```
 
-**NOTE: Valid credentials already work!**
+**NOTE: On this stage valid credentials doesn't work yet!**
