@@ -180,6 +180,8 @@ When successfully run, you can send API calls to localhost:3000!
 
 ```
 
+**NOTE: Valid credentials already work!**
+
 **TEMPORARY**
 
 3. Also, for manipulating user-feature demo, you can do such things:
@@ -188,4 +190,3 @@ When successfully run, you can send API calls to localhost:3000!
 - Send GET Request to <http://localhost:3000/api/user> (get all users) - for now, it returns an array with one dummy User object included (pre-prepared, for now!)
 - Send GET Request to <http://localhost:3000/api/user/:id> (get user by id) - for now, it returns null (pre-prepared, for now!)
 
-**NOTE: Valid credentials already work!**
