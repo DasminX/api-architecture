@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { ExpressHandlerType } from "../../_shared/types";
+import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 
-// Shape of send-mail request body
 export const sendMailRequestBody = z
   .object({
     sender: z.string().email(),
@@ -11,6 +12,19 @@ export const sendMailRequestBody = z
   })
   .strict();
 // Strict ensures it accepts only these properties and nothing more or less
+
+export const sendMailRequestBodyValidator: ExpressHandlerType = (
+  req,
+  _res,
+  next
+) => {
+  try {
+    parseZodObjectOrThrow(sendMailRequestBody, req.body);
+    next();
+  } catch (err) {
+    return next(err);
+  }
+};
 
 // Type based on Zod object
 export type sendMailRequestBodyT = typeof sendMailRequestBody;

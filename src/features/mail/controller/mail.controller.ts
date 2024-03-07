@@ -1,37 +1,17 @@
 import { InternalError } from "../../../utils/errors";
 import { NodemailerService } from "../service/nodemailer.service";
-import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 import { ExpressHandlerType } from "../../_shared/types";
-import {
-  SendMailRequestBodyTInfer,
-  sendMailRequestBodyT,
-} from "../model/sendMailRequestBody.model";
-import { SendMailResponseDto } from "../dto/sendMailResponse.dto";
 import { MailControllerI } from "./abstraction";
 
 export class NodemailerController extends MailControllerI {
-  private readonly sendMailRequestBody: sendMailRequestBodyT;
-  constructor({
-    mailService,
-    sendMailRequestBody,
-  }: {
-    mailService: NodemailerService;
-    sendMailRequestBody: sendMailRequestBodyT;
-  }) {
+  constructor({ mailService }: { mailService: NodemailerService }) {
     super({ mailService });
-    this.sendMailRequestBody = sendMailRequestBody;
   }
 
   /* Arrow function method - workaround in losing "this" context when it's called */
   public sendMail: ExpressHandlerType = async (req, res, next) => {
     try {
-      const credentials: SendMailRequestBodyTInfer = parseZodObjectOrThrow(
-        this.sendMailRequestBody,
-        req.body
-      );
-
-      const sendMailResult: SendMailResponseDto =
-        await this.mailService.sendMail(credentials);
+      const sendMailResult = await this.mailService.sendMail(req.body);
 
       if (!sendMailResult.success) {
         throw new InternalError(sendMailResult.error); // Error in nodemailer

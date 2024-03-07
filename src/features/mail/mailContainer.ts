@@ -1,14 +1,14 @@
 import { AwilixContainer, asClass, asValue } from "awilix";
-import { sendMailRequestBody } from "./model/sendMailRequestBody.model";
 import { NodemailerService } from "./service/nodemailer.service";
 import { NodemailerController } from "./controller/mail.controller";
 import { MailRoute } from "./route/mail.route";
+import { sendMailRequestBodyValidator } from "./validator/sendMailRequestBodyValidator";
 
 export const injectMailContainerDependencies = (container: AwilixContainer) => {
   container.register({
-    sendMailRequestBody: asValue(sendMailRequestBody),
     mailService: asClass(NodemailerService).singleton(),
     mailController: asClass(NodemailerController).singleton(),
+    sendMailRequestBodyValidator: asValue(sendMailRequestBodyValidator),
     mailRoute: asClass(MailRoute).singleton(),
   });
 };

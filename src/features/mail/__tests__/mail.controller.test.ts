@@ -4,15 +4,15 @@ import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssu
 import { ZodError } from "zod";
 import { MailOptions, MailServiceI } from "../service/abstraction";
 import {
-  SendMailResponse,
-  SendMailResponseFail,
+  SendMailResponseDto,
+  SendMailResponseFailDto,
 } from "../dto/sendMailResponse.dto";
-import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
+import { sendMailRequestBody } from "../validator/sendMailRequestBodyValidator";
 
 class MockMailService extends MailServiceI<any> {
   protected createTransport() {}
 
-  sendMail(options: MailOptions): Promise<SendMailResponse> {
+  sendMail(options: MailOptions): Promise<SendMailResponseDto> {
     try {
       sendMailRequestBody.parse(options);
       return Promise.resolve({ success: true });
@@ -53,7 +53,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseFail;
+      const sendMailResponseError = e as SendMailResponseFailDto;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
@@ -72,7 +72,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseFail;
+      const sendMailResponseError = e as SendMailResponseFailDto;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
@@ -92,7 +92,7 @@ describe("mailService", () => {
 
       expect(true).toBe(false);
     } catch (e) {
-      const sendMailResponseError = e as SendMailResponseFail;
+      const sendMailResponseError = e as SendMailResponseFailDto;
       expect(sendMailResponseError.success).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
