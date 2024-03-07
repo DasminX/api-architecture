@@ -1,3 +1,5 @@
+import { generateUUID } from "../../_shared/functions/generateUUID";
+
 export type UserFields = {
   name: string;
   surname: string;
@@ -13,21 +15,10 @@ export class User {
   public readonly email: string;
 
   constructor({ name, surname, age, email }: UserFields) {
-    this.id = this._generateUUID();
+    this.id = generateUUID();
     this.name = name;
     this.surname = surname;
     this.age = age;
     this.email = email;
-  }
-
-  private _generateUUID() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        const r = (Math.random() * 16) | 0,
-          v = c == "x" ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      }
-    );
   }
 }
