@@ -8,12 +8,9 @@ export class MailRoute {
   private readonly mailController: MailControllerI;
   private readonly sendMailRequestBodyValidator: ExpressHandlerType;
 
-  constructor({
-    mailController,
-    sendMailRequestBodyValidator,
-  }: MailRouteDependencies) {
-    this.mailController = mailController;
-    this.sendMailRequestBodyValidator = sendMailRequestBodyValidator;
+  constructor(routeDeps: MailRouteDependencies) {
+    this.mailController = routeDeps.mailController;
+    this.sendMailRequestBodyValidator = routeDeps.sendMailRequestBodyValidator;
 
     this.router = express.Router();
     this._applyRoutesHandlers();

@@ -4,7 +4,6 @@ import {
   AwilixContainer,
   InjectionMode,
   asClass,
-  asFunction,
   asValue,
   createContainer,
 } from "awilix";

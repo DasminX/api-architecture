@@ -8,33 +8,18 @@ export class UserController extends UserControllerI {
     super({ userService });
   }
 
-  public createUser: ExpressHandlerType = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public createUser: ExpressHandlerType = async (req, res, next) => {
     const newUser = await this.userService.createUser(req.body);
-    console.log(newUser);
     res.json({ data: newUser });
   };
 
-  public getUsers: ExpressHandlerType = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public getUsers: ExpressHandlerType = async (req, res, next) => {
     const users = await this.userService.getUsers();
-    console.log(users);
     res.json({ data: users });
   };
 
-  public getUserById: ExpressHandlerType = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public getUserById: ExpressHandlerType = async (req, res, next) => {
     const user = await this.userService.getUserById("1");
-    console.log(user);
     res.json({ data: user });
   };
 }

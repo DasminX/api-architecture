@@ -20,16 +20,11 @@ export class App {
   private readonly notFoundController: ExpressHandlerType;
   private readonly errorController: ExpressErrorHandlerType;
 
-  constructor({
-    mailRoute,
-    userRoute,
-    notFoundController,
-    errorController,
-  }: AppDependencies) {
-    this.mailRoute = mailRoute;
-    this.userRoute = userRoute;
-    this.notFoundController = notFoundController;
-    this.errorController = errorController;
+  constructor(appDeps: AppDependencies) {
+    this.mailRoute = appDeps.mailRoute;
+    this.userRoute = appDeps.userRoute;
+    this.notFoundController = appDeps.notFoundController;
+    this.errorController = appDeps.errorController;
 
     this.app = express();
     this._setProtection();
