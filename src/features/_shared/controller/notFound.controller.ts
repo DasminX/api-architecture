@@ -1,4 +1,4 @@
-import { NotFoundError } from "../../../errors";
+import { NotFoundError } from "../../../utils/errors";
 import { ExpressHandlerType } from "../types";
 
 export const notFoundController: ExpressHandlerType = (req, _res, next) => {

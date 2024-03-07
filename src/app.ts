@@ -8,19 +8,14 @@ import { notFoundController } from "./features/_shared/controller/notFound.contr
 import { errorController } from "./features/_shared/controller/error.controller";
 import { MailRoute } from "./features/mail/route/mail.route";
 import { UserRoute } from "./features/user/route/user.route";
+import { AppDependencies } from "./utils/types";
 
 export class App {
   public readonly app;
   private readonly mailRoute: MailRoute;
   private readonly userRoute: UserRoute;
 
-  constructor({
-    mailRoute,
-    userRoute,
-  }: {
-    mailRoute: MailRoute;
-    userRoute: UserRoute;
-  }) {
+  constructor({ mailRoute, userRoute }: AppDependencies) {
     this.mailRoute = mailRoute;
     this.userRoute = userRoute;
 

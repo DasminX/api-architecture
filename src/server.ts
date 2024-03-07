@@ -1,4 +1,4 @@
-import { loadEnvFile } from "./loadEnvFile";
+import { loadEnvFile } from "./config/loadEnvFile";
 import { createAwilixContainer } from "./container";
 
 (() => {
@@ -8,7 +8,7 @@ import { createAwilixContainer } from "./container";
     process.exit(1);
   });
 
-  loadEnvFile(); // Nothing in .env, just mocking...
+  loadEnvFile();
   const container = createAwilixContainer();
 
   const port = process.env.PORT || 3000;

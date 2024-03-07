@@ -1,4 +1,4 @@
-import { InternalError } from "../../../errors";
+import { InternalError } from "../../../utils/errors";
 import { NodemailerService } from "../service/mail/nodemailer.service";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 import { ExpressHandlerType } from "../../_shared/types";
