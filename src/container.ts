@@ -1,7 +1,11 @@
+import { notFoundController } from "./features/_shared/controller/notFound.controller";
+import { errorController } from "./features/_shared/controller/error.controller";
 import {
   AwilixContainer,
   InjectionMode,
   asClass,
+  asFunction,
+  asValue,
   createContainer,
 } from "awilix";
 import { App } from "./app";
@@ -17,6 +21,8 @@ export const createAwilixContainer = (): AwilixContainer => {
   injectUserContainerDependencies(container);
 
   container.register({
+    notFoundController: asValue(notFoundController),
+    errorController: asValue(errorController),
     appEntry: asClass(App).singleton(),
   });
 

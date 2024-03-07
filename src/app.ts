@@ -1,23 +1,35 @@
-import express from "express";
+import { AppError } from "./utils/errors";
+import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
-import { notFoundController } from "./features/_shared/controller/notFound.controller";
-import { errorController } from "./features/_shared/controller/error.controller";
 import { MailRoute } from "./features/mail/route/mail.route";
 import { UserRoute } from "./features/user/route/user.route";
 import { AppDependencies } from "./utils/types";
+import {
+  ExpressErrorHandlerType,
+  ExpressHandlerType,
+} from "./features/_shared/types";
 
 export class App {
   public readonly app;
   private readonly mailRoute: MailRoute;
   private readonly userRoute: UserRoute;
+  private readonly notFoundController: ExpressHandlerType;
+  private readonly errorController: ExpressErrorHandlerType;
 
-  constructor({ mailRoute, userRoute }: AppDependencies) {
+  constructor({
+    mailRoute,
+    userRoute,
+    notFoundController,
+    errorController,
+  }: AppDependencies) {
     this.mailRoute = mailRoute;
     this.userRoute = userRoute;
+    this.notFoundController = notFoundController;
+    this.errorController = errorController;
 
     this.app = express();
     this._setProtection();
@@ -53,8 +65,13 @@ export class App {
     this.app.use("/api/mail", this.mailRoute.router);
     this.app.use("/api/user", this.userRoute.router);
 
-    this.app.all("*", notFoundController);
+    this.app.all("*", (req: Request, res: Response, next: NextFunction) =>
+      this.notFoundController(req, res, next)
+    );
 
-    this.app.use(errorController);
+    this.app.use(
+      (err: AppError, req: Request, res: Response, next: NextFunction) =>
+        this.errorController(err, req, res, next)
+    );
   }
 }
