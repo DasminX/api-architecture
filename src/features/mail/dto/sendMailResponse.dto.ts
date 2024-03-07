@@ -1,10 +1,10 @@
 type IncomingUnknownErrorType = Error | string | unknown;
 
-export class SendMailResponseSuccess {
+export class SendMailResponseSuccessDto {
   public readonly success = true;
 }
 
-export class SendMailResponseFail {
+export class SendMailResponseFailDto {
   public readonly success = false;
   public readonly error: string;
 
@@ -23,4 +23,6 @@ export class SendMailResponseFail {
   }
 }
 
-export type SendMailResponse = SendMailResponseSuccess | SendMailResponseFail;
+export type SendMailResponseDto =
+  | SendMailResponseSuccessDto
+  | SendMailResponseFailDto;

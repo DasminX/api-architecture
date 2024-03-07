@@ -2,11 +2,11 @@ import { describe, it, expect } from "vitest";
 
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { ZodError } from "zod";
-import { MailOptions, MailServiceI } from "../service/mail/abstraction";
+import { MailOptions, MailServiceI } from "../service/abstraction";
 import {
   SendMailResponse,
   SendMailResponseFail,
-} from "../service/mail/responses";
+} from "../dto/sendMailResponse.dto";
 import { sendMailRequestBody } from "../model/sendMailRequestBody.model";
 
 class MockMailService extends MailServiceI<any> {

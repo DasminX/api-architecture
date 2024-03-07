@@ -1,5 +1,5 @@
 import { ExpressHandlerType } from "../../_shared/types";
-import { MailServiceI } from "../service/mail/abstraction";
+import { MailServiceI } from "../service/abstraction";
 
 export abstract class MailControllerI {
   protected readonly mailService: MailServiceI<any>;

@@ -1,12 +1,12 @@
 import { InternalError } from "../../../utils/errors";
-import { NodemailerService } from "../service/mail/nodemailer.service";
+import { NodemailerService } from "../service/nodemailer.service";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 import { ExpressHandlerType } from "../../_shared/types";
 import {
   SendMailRequestBodyTInfer,
   sendMailRequestBodyT,
 } from "../model/sendMailRequestBody.model";
-import { SendMailResponse } from "../service/mail/responses";
+import { SendMailResponseDto } from "../dto/sendMailResponse.dto";
 import { MailControllerI } from "./abstraction";
 
 export class NodemailerController extends MailControllerI {
@@ -30,9 +30,8 @@ export class NodemailerController extends MailControllerI {
         req.body
       );
 
-      const sendMailResult: SendMailResponse = await this.mailService.sendMail(
-        credentials
-      );
+      const sendMailResult: SendMailResponseDto =
+        await this.mailService.sendMail(credentials);
 
       if (!sendMailResult.success) {
         throw new InternalError(sendMailResult.error); // Error in nodemailer

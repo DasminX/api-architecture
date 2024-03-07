@@ -1,10 +1,10 @@
 import { Transporter, createTransport } from "nodemailer";
 import { MailServiceI, MailOptions } from "./abstraction";
 import {
-  SendMailResponse,
-  SendMailResponseFail,
-  SendMailResponseSuccess,
-} from "./responses";
+  SendMailResponseDto,
+  SendMailResponseFailDto,
+  SendMailResponseSuccessDto,
+} from "../dto/sendMailResponse.dto";
 
 export class NodemailerService extends MailServiceI<Transporter> {
   public readonly transporter: Transporter = this.createTransport();
@@ -17,7 +17,7 @@ export class NodemailerService extends MailServiceI<Transporter> {
     });
   }
 
-  public async sendMail(options: MailOptions): Promise<SendMailResponse> {
+  public async sendMail(options: MailOptions): Promise<SendMailResponseDto> {
     try {
       await this.transporter.sendMail({
         from: options.sender,
@@ -26,9 +26,9 @@ export class NodemailerService extends MailServiceI<Transporter> {
         text: options.content,
       });
 
-      return new SendMailResponseSuccess();
+      return new SendMailResponseSuccessDto();
     } catch (error) {
-      return new SendMailResponseFail(error);
+      return new SendMailResponseFailDto(error);
     }
   }
 }

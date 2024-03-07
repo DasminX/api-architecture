@@ -1,6 +1,6 @@
 import { AwilixContainer, asClass, asValue } from "awilix";
 import { sendMailRequestBody } from "./model/sendMailRequestBody.model";
-import { NodemailerService } from "./service/mail/nodemailer.service";
+import { NodemailerService } from "./service/nodemailer.service";
 import { NodemailerController } from "./controller/mail.controller";
 import { MailRoute } from "./route/mail.route";
 
