@@ -19,7 +19,7 @@ export class UserController extends UserControllerI {
   };
 
   public getUserById: ExpressHandlerType = async (req, res, next) => {
-    const user = await this.userService.getUserById("1");
+    const user = await this.userService.getUserById(req.params.id ?? "no-id");
     res.json({ data: user });
   };
 }
