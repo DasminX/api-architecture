@@ -4,18 +4,18 @@ import { UserRespositoryI } from "./abstraction";
 export class InMemoryUserRepository implements UserRespositoryI {
   private readonly users: User[] = [];
 
-  createUser(fields: UserFields): User {
+  async createUser(fields: UserFields): Promise<User> {
     const newUser = new User(fields);
     this.users.push(newUser);
 
     return newUser;
   }
 
-  getUsers(): User[] {
+  async getUsers(): Promise<User[]> {
     return this.users;
   }
 
-  getUserById(id: string): User | null {
+  async getUserById(id: string): Promise<User | null> {
     const searchedUser = this.users.find((user) => user.id === id);
 
     return searchedUser ?? null;

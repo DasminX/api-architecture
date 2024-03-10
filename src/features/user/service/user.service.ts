@@ -10,12 +10,12 @@ export class UserService implements UserServiceI {
   }
 
   async createUser(fields: UserFields): Promise<User> {
-    return this.userRepository.createUser(fields);
+    return await this.userRepository.createUser(fields);
   }
   async getUserById(id: string): Promise<User | null> {
-    return this.userRepository.getUserById(id);
+    return await this.userRepository.getUserById(id);
   }
   async getUsers(): Promise<User[]> {
-    return this.userRepository.getUsers();
+    return await this.userRepository.getUsers();
   }
 }
