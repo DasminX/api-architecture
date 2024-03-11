@@ -11,6 +11,7 @@ import {
   ExpressErrorHandlerType,
   ExpressHandlerType,
 } from "./features/_shared/types";
+import { ABSOLUTE_API_ENTRY_ROUTE } from "./constants";
 
 type AppDeps = {
   mailRoute: MailRoute;
@@ -63,8 +64,8 @@ export class App {
   }
 
   private _setHandlers() {
-    this.app.use("/api/v1/mail", this.mailRoute.router);
-    this.app.use("/api/v1/users", this.userRoute.router);
+    this.app.use(`${ABSOLUTE_API_ENTRY_ROUTE}/mail`, this.mailRoute.router);
+    this.app.use(`${ABSOLUTE_API_ENTRY_ROUTE}/users`, this.userRoute.router);
 
     this.app.all("*", (req: Request, res: Response, next: NextFunction) =>
       this.notFoundController(req, res, next)
