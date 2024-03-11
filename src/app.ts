@@ -63,8 +63,8 @@ export class App {
   }
 
   private _setHandlers() {
-    this.app.use("/api/mail", this.mailRoute.router);
-    this.app.use("/api/users", this.userRoute.router);
+    this.app.use("/api/v1/mail", this.mailRoute.router);
+    this.app.use("/api/v1/users", this.userRoute.router);
 
     this.app.all("*", (req: Request, res: Response, next: NextFunction) =>
       this.notFoundController(req, res, next)
