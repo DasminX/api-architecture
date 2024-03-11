@@ -186,7 +186,7 @@ When successfully run, you can send API calls to localhost:3000!
 
 3. Also, for manipulating user-feature demo, you can do such things:
 
-- Send POST Request to <http://localhost:3000/api/user> (create user) - for now, it returns newly created dummy User object (pre-prepared, for now!)
-- Send GET Request to <http://localhost:3000/api/user> (get all users) - for now, it returns an array with one dummy User object included (pre-prepared, for now!)
-- Send GET Request to <http://localhost:3000/api/user/:id> (get user by id) - for now, it returns null (pre-prepared, for now!)
+- Send POST Request to <http://localhost:3000/api/v1/users> (create user)
+- Send GET Request to <http://localhost:3000/api/v1/users> (get all users)
+- Send GET Request to <http://localhost:3000/api/v1/users/:id> (get user by id)
 
