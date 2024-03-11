@@ -4,27 +4,26 @@ import { ExpressHandlerType } from "../../_shared/types";
 
 type MailRouteDeps = {
   mailController: MailControllerI;
-  sendMailRequestBodyValidator: ExpressHandlerType;
+  sendMailSchemaValidator: ExpressHandlerType;
 };
 
 export class MailRoute {
   public readonly router: Router;
   private readonly mailController: MailControllerI;
-  private readonly sendMailRequestBodyValidator: ExpressHandlerType;
+  private readonly sendMailSchemaValidator: ExpressHandlerType;
 
   constructor(routeDeps: MailRouteDeps) {
     this.mailController = routeDeps.mailController;
-    this.sendMailRequestBodyValidator = routeDeps.sendMailRequestBodyValidator;
+    this.sendMailSchemaValidator = routeDeps.sendMailSchemaValidator;
 
     this.router = express.Router();
     this._applyRoutesHandlers();
   }
 
-  // TODO: add validation middleware with validator
   private _applyRoutesHandlers() {
     this.router.post(
       "/send",
-      this.sendMailRequestBodyValidator,
+      this.sendMailSchemaValidator,
       this.mailController.sendMail
     );
   }

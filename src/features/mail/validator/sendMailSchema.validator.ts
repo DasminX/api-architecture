@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ExpressHandlerType } from "../../_shared/types";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 
-export const sendMailRequestBody = z
+export const sendMailSchema = z
   .object({
     sender: z.string().email(),
     content: z.string().min(30, {
@@ -13,13 +13,13 @@ export const sendMailRequestBody = z
   .strict();
 // Strict ensures it accepts only these properties and nothing more or less
 
-export const sendMailRequestBodyValidator: ExpressHandlerType = (
+export const sendMailSchemaValidator: ExpressHandlerType = (
   req,
   _res,
   next
 ) => {
   try {
-    parseZodObjectOrThrow(sendMailRequestBody, req.body);
+    parseZodObjectOrThrow(sendMailSchema, req.body);
     next();
   } catch (err) {
     return next(err);
@@ -27,5 +27,5 @@ export const sendMailRequestBodyValidator: ExpressHandlerType = (
 };
 
 // Type based on Zod object
-export type sendMailRequestBodyT = typeof sendMailRequestBody;
-export type SendMailRequestBodyTInfer = z.infer<typeof sendMailRequestBody>;
+export type SendMailSchemaRequestBodyT = typeof sendMailSchema;
+export type SendMailSchemaRequestBodyTInfer = z.infer<typeof sendMailSchema>;

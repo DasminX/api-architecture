@@ -8,14 +8,14 @@ import {
   SendMailResponseFailDto,
   SendMailResponseSuccessDto,
 } from "../dto/sendMailResponse.dto";
-import { sendMailRequestBody } from "../validator/sendMailRequestBodyValidator";
+import { sendMailSchema } from "../validator/sendMailSchema.validator";
 
 class MockMailService extends MailServiceI<any> {
   protected createTransport() {}
 
   sendMail(options: MailOptions): Promise<SendMailResponseDto> {
     try {
-      sendMailRequestBody.parse(options);
+      sendMailSchema.parse(options);
       return Promise.resolve(new SendMailResponseSuccessDto());
     } catch (e) {
       return Promise.reject({

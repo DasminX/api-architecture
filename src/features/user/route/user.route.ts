@@ -4,17 +4,17 @@ import { ExpressHandlerType } from "../../_shared/types";
 
 type UserRouteDeps = {
   userController: UserControllerI;
-  createUserValidator: ExpressHandlerType;
+  createUserSchemaValidator: ExpressHandlerType;
 };
 
 export class UserRoute {
   public readonly router: Router;
   private readonly userController: UserControllerI;
-  private readonly createUserValidator: ExpressHandlerType;
+  private readonly createUserSchemaValidator: ExpressHandlerType;
 
-  constructor({ userController, createUserValidator }: UserRouteDeps) {
+  constructor({ userController, createUserSchemaValidator }: UserRouteDeps) {
     this.userController = userController;
-    this.createUserValidator = createUserValidator;
+    this.createUserSchemaValidator = createUserSchemaValidator;
 
     this.router = express.Router();
     this._applyRoutesHandlers();
@@ -23,7 +23,7 @@ export class UserRoute {
   private _applyRoutesHandlers() {
     this.router.post(
       "/",
-      this.createUserValidator,
+      this.createUserSchemaValidator,
       this.userController.createUser
     );
     this.router.get("/", this.userController.getUsers);

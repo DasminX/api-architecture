@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ExpressHandlerType } from "../../_shared/types";
 import { parseZodObjectOrThrow } from "../../_shared/functions/parseZodObjectOrThrow";
 
-export const createUser = z
+export const createUserSchema = z
   .object({
     name: z.string(),
     surname: z.string(),
@@ -12,9 +12,13 @@ export const createUser = z
   .strict();
 // Strict ensures it accepts only these properties and nothing more or less
 
-export const createUserValidator: ExpressHandlerType = (req, _res, next) => {
+export const createUserSchemaValidator: ExpressHandlerType = (
+  req,
+  _res,
+  next
+) => {
   try {
-    parseZodObjectOrThrow(createUser, req.body);
+    parseZodObjectOrThrow(createUserSchema, req.body);
     next();
   } catch (err) {
     return next(err);
@@ -22,5 +26,5 @@ export const createUserValidator: ExpressHandlerType = (req, _res, next) => {
 };
 
 // Type based on Zod object
-export type createUserT = typeof createUser;
-export type createUserTInfer = z.infer<typeof createUser>;
+export type createUserT = typeof createUserSchema;
+export type createUserTInfer = z.infer<typeof createUserSchema>;
