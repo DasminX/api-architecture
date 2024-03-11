@@ -1,3 +1,4 @@
+import { APIResponseSuccess } from "./../../_shared/response/APIResponse";
 import { InternalError } from "../../../errors";
 import { ExpressHandlerType } from "../../_shared/types";
 import { MailControllerI, MailControllerIDeps } from "./abstraction";
@@ -12,11 +13,11 @@ export class NodemailerController extends MailControllerI {
     try {
       const sendMailResult = await this.mailService.sendMail(req.body);
 
-      if (!sendMailResult.success) {
-        throw new InternalError(sendMailResult.error); // Error in nodemailer
+      if (!sendMailResult.delivered) {
+        throw new InternalError(sendMailResult.errorMessage); // Error in nodemailer
       }
 
-      return res.json(sendMailResult);
+      return res.json(new APIResponseSuccess(sendMailResult));
     } catch (err) {
       return next(err);
     }

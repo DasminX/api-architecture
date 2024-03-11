@@ -1,15 +1,16 @@
 type IncomingUnknownErrorType = Error | string | unknown;
 
 export class SendMailResponseSuccessDto {
-  public readonly success = true;
+  public readonly delivered = true;
+  public readonly timestamp = Date.now();
 }
 
 export class SendMailResponseFailDto {
-  public readonly success = false;
-  public readonly error: string;
+  public readonly delivered = false;
+  public readonly errorMessage: string;
 
   constructor(_error: IncomingUnknownErrorType) {
-    this.error = this._getErrorMessage(_error);
+    this.errorMessage = this._getErrorMessage(_error);
   }
 
   private _getErrorMessage(_error: IncomingUnknownErrorType): string {
