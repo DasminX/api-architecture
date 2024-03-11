@@ -6,6 +6,7 @@ import { MailOptions, MailServiceI } from "../service/abstraction";
 import {
   SendMailResponseDto,
   SendMailResponseFailDto,
+  SendMailResponseSuccessDto,
 } from "../dto/sendMailResponse.dto";
 import { sendMailRequestBody } from "../validator/sendMailRequestBodyValidator";
 
@@ -15,7 +16,7 @@ class MockMailService extends MailServiceI<any> {
   sendMail(options: MailOptions): Promise<SendMailResponseDto> {
     try {
       sendMailRequestBody.parse(options);
-      return Promise.resolve({ success: true });
+      return Promise.resolve(new SendMailResponseSuccessDto());
     } catch (e) {
       return Promise.reject({
         success: false,
@@ -38,8 +39,8 @@ describe("mailService", () => {
       subject: "New thing",
     });
 
-    expect(mailServiceResponse).toHaveProperty("success");
-    expect(mailServiceResponse.success).toBeTruthy();
+    expect(mailServiceResponse).toHaveProperty("delivered");
+    expect(mailServiceResponse.delivered).toBeTruthy();
   });
 
   it("should yield an error with invalid sender field if such is invalid", async () => {
@@ -54,7 +55,7 @@ describe("mailService", () => {
       expect(true).toBe(false);
     } catch (e) {
       const sendMailResponseError = e as SendMailResponseFailDto;
-      expect(sendMailResponseError.success).toBeFalsy();
+      expect(sendMailResponseError.delivered).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
         expect(sendMailResponseError.error).toContain("sender");
@@ -73,7 +74,7 @@ describe("mailService", () => {
       expect(true).toBe(false);
     } catch (e) {
       const sendMailResponseError = e as SendMailResponseFailDto;
-      expect(sendMailResponseError.success).toBeFalsy();
+      expect(sendMailResponseError.delivered).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
         expect(sendMailResponseError.error).toContain("content");
@@ -93,7 +94,7 @@ describe("mailService", () => {
       expect(true).toBe(false);
     } catch (e) {
       const sendMailResponseError = e as SendMailResponseFailDto;
-      expect(sendMailResponseError.success).toBeFalsy();
+      expect(sendMailResponseError.delivered).toBeFalsy();
       expect(sendMailResponseError).toHaveProperty("error");
       if ("error" in sendMailResponseError) {
         expect(sendMailResponseError.error).toContain("subject");
