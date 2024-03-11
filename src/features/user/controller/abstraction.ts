@@ -1,10 +1,12 @@
 import { ExpressHandlerType } from "../../_shared/types";
 import { UserServiceI } from "../service/abstraction";
 
+export type UserControllerIDeps = { userService: UserServiceI };
+
 export abstract class UserControllerI {
   protected readonly userService: UserServiceI;
 
-  constructor({ userService }: { userService: UserServiceI }) {
+  constructor({ userService }: UserControllerIDeps) {
     this.userService = userService;
   }
 

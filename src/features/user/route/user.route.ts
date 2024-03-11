@@ -2,18 +2,17 @@ import express, { Router } from "express";
 import { UserControllerI } from "../controller/abstraction";
 import { ExpressHandlerType } from "../../_shared/types";
 
+type UserRouteDeps = {
+  userController: UserControllerI;
+  createUserValidator: ExpressHandlerType;
+};
+
 export class UserRoute {
   public readonly router: Router;
   private readonly userController: UserControllerI;
   private readonly createUserValidator: ExpressHandlerType;
 
-  constructor({
-    userController,
-    createUserValidator,
-  }: {
-    userController: UserControllerI;
-    createUserValidator: ExpressHandlerType;
-  }) {
+  constructor({ userController, createUserValidator }: UserRouteDeps) {
     this.userController = userController;
     this.createUserValidator = createUserValidator;
 

@@ -1,10 +1,9 @@
-import { InternalError } from "../../../utils/errors";
-import { NodemailerService } from "../service/nodemailer.service";
+import { InternalError } from "../../../errors";
 import { ExpressHandlerType } from "../../_shared/types";
-import { MailControllerI } from "./abstraction";
+import { MailControllerI, MailControllerIDeps } from "./abstraction";
 
 export class NodemailerController extends MailControllerI {
-  constructor({ mailService }: { mailService: NodemailerService }) {
+  constructor({ mailService }: MailControllerIDeps) {
     super({ mailService });
   }
 

@@ -1,9 +1,8 @@
 import { UserFields, User } from "../model/User";
-import { UserRespositoryI } from "../repository/abstraction";
-import { UserServiceI } from "./abstraction";
+import { UserServiceI, UserServiceIDeps } from "./abstraction";
 
 export class UserService extends UserServiceI {
-  constructor({ userRepository }: { userRepository: UserRespositoryI }) {
+  constructor({ userRepository }: UserServiceIDeps) {
     super({ userRepository });
   }
 

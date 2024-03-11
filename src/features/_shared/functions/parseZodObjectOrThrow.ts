@@ -1,6 +1,6 @@
 import { ZodObject, ZodRawShape } from "zod";
 import { formatZodErrorIssues } from "./formatZodErrorIssues";
-import { ValidationError } from "../../../utils/errors";
+import { ValidationError } from "../../../errors";
 
 export const parseZodObjectOrThrow = <T extends ZodRawShape>(
   schema: ZodObject<T, "passthrough" | "strict" | "strip">,

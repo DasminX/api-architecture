@@ -1,17 +1,23 @@
-import { AppError } from "./utils/errors";
 import express, { NextFunction, Request, Response } from "express";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 
+import { AppError } from "./errors";
 import { MailRoute } from "./features/mail/route/mail.route";
 import { UserRoute } from "./features/user/route/user.route";
-import { AppDependencies } from "./utils/types";
 import {
   ExpressErrorHandlerType,
   ExpressHandlerType,
 } from "./features/_shared/types";
+
+type AppDeps = {
+  mailRoute: MailRoute;
+  userRoute: UserRoute;
+  notFoundController: ExpressHandlerType;
+  errorController: ExpressErrorHandlerType;
+};
 
 export class App {
   public readonly app;
@@ -20,7 +26,7 @@ export class App {
   private readonly notFoundController: ExpressHandlerType;
   private readonly errorController: ExpressErrorHandlerType;
 
-  constructor(appDeps: AppDependencies) {
+  constructor(appDeps: AppDeps) {
     this.mailRoute = appDeps.mailRoute;
     this.userRoute = appDeps.userRoute;
     this.notFoundController = appDeps.notFoundController;

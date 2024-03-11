@@ -1,10 +1,12 @@
 import { User, UserFields } from "../model/User";
 import { UserRespositoryI } from "../repository/abstraction";
 
+export type UserServiceIDeps = { userRepository: UserRespositoryI };
+
 export abstract class UserServiceI {
   protected readonly userRepository: UserRespositoryI;
 
-  constructor({ userRepository }: { userRepository: UserRespositoryI }) {
+  constructor({ userRepository }: UserServiceIDeps) {
     this.userRepository = userRepository;
   }
 
