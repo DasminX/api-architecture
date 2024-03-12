@@ -12,7 +12,7 @@ export class UserController extends UserControllerI {
     res.json(new APIResponseSuccess(newUser));
   };
 
-  public getUsers: ExpressHandlerType = async (req, res, _next) => {
+  public getUsers: ExpressHandlerType = async (_req, res, _next) => {
     const users = await this.userService.getUsers();
     res.json(new APIResponseSuccess(users));
   };
