@@ -25,7 +25,3 @@ export const sendMailSchemaValidator: ExpressHandlerType = (
     return next(err);
   }
 };
-
-// Type based on Zod object
-export type SendMailSchemaRequestBodyT = typeof sendMailSchema;
-export type SendMailSchemaRequestBodyTInfer = z.infer<typeof sendMailSchema>;

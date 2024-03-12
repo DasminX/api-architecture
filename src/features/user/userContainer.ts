@@ -3,7 +3,7 @@ import { UserRoute } from "./route/user.route";
 import { UserController } from "./controller/user.controller";
 import { UserService } from "./service/user.service";
 import { InMemoryUserRepository } from "./repository/inMemory.repository";
-import { createUserSchemaValidator } from "./validator/createUser";
+import { createUserSchemaValidator } from "./validator/createUserSchema";
 
 export const injectUserContainerDependencies = (container: AwilixContainer) => {
   container.register({

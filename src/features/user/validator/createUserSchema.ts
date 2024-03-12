@@ -24,7 +24,3 @@ export const createUserSchemaValidator: ExpressHandlerType = (
     return next(err);
   }
 };
-
-// Type based on Zod object
-export type createUserT = typeof createUserSchema;
-export type createUserTInfer = z.infer<typeof createUserSchema>;
