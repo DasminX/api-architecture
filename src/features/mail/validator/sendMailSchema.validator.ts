@@ -13,11 +13,7 @@ export const sendMailSchema = z
   .strict();
 // Strict ensures it accepts only these properties and nothing more or less
 
-export const sendMailSchemaValidator: ExpressHandlerType = (
-  req,
-  _res,
-  next
-) => {
+export const sendMailSchemaValidator: ExpressHandlerType = (req, _res, next) => {
   try {
     parseZodObjectOrThrow(sendMailSchema, req.body);
     next();

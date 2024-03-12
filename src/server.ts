@@ -2,7 +2,7 @@ import { loadEnvFile } from "./config/loadEnvFile";
 import { createAwilixContainer } from "./container";
 
 (() => {
-  process.on("uncaughtException", (err) => {
+  process.on("uncaughtException", err => {
     console.log(err.name, err.message);
     console.log(`UNCAUGHT EXCEPTION! Shutting down...`);
     process.exit(1);
@@ -17,7 +17,7 @@ import { createAwilixContainer } from "./container";
     console.log(`App running on port ${port}...`);
   });
 
-  process.on("unhandledRejection", (err) => {
+  process.on("unhandledRejection", err => {
     console.log(err);
     console.log(`UNHANDLED REJECTION! Shutting down...`);
     server.close(() => {

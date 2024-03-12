@@ -7,10 +7,7 @@ import compression from "compression";
 import { AppError } from "./errors";
 import { MailRoute } from "./features/mail/route/mail.route";
 import { UserRoute } from "./features/user/route/user.route";
-import {
-  ExpressErrorHandlerType,
-  ExpressHandlerType,
-} from "./features/_shared/types";
+import { ExpressErrorHandlerType, ExpressHandlerType } from "./features/_shared/types";
 import { ABSOLUTE_API_ENTRY_ROUTE } from "./constants";
 
 type AppDeps = {
@@ -58,7 +55,7 @@ export class App {
     this.app.use(
       express.urlencoded({
         extended: true,
-      })
+      }),
     );
     this.app.use(compression());
   }
@@ -67,13 +64,10 @@ export class App {
     this.app.use(`${ABSOLUTE_API_ENTRY_ROUTE}/mail`, this.mailRoute.router);
     this.app.use(`${ABSOLUTE_API_ENTRY_ROUTE}/users`, this.userRoute.router);
 
-    this.app.all("*", (req: Request, res: Response, next: NextFunction) =>
-      this.notFoundController(req, res, next)
-    );
+    this.app.all("*", (req: Request, res: Response, next: NextFunction) => this.notFoundController(req, res, next));
 
-    this.app.use(
-      (err: AppError, req: Request, res: Response, next: NextFunction) =>
-        this.errorController(err, req, res, next)
+    this.app.use((err: AppError, req: Request, res: Response, next: NextFunction) =>
+      this.errorController(err, req, res, next),
     );
   }
 }

@@ -21,11 +21,7 @@ export class UserRoute {
   }
 
   private _applyRoutesHandlers() {
-    this.router.post(
-      "/",
-      this.createUserSchemaValidator,
-      this.userController.createUser
-    );
+    this.router.post("/", this.createUserSchemaValidator, this.userController.createUser);
     this.router.get("/", this.userController.getUsers);
     this.router.get("/:id", this.userController.getUserById);
   }

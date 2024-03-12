@@ -4,7 +4,7 @@ import { ValidationError } from "../../../errors";
 
 export const parseZodObjectOrThrow = <T extends ZodRawShape>(
   schema: ZodObject<T, "passthrough" | "strict" | "strip">,
-  body: unknown
+  body: unknown,
 ) => {
   const parseResult = schema.safeParse(body);
   if (parseResult.success) {

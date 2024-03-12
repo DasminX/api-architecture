@@ -3,11 +3,7 @@ import { describe, it, expect } from "vitest";
 import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssues";
 import { ZodError } from "zod";
 import { MailOptions, MailServiceI } from "../service/abstraction";
-import {
-  SendMailResponseDto,
-  SendMailResponseFailDto,
-  SendMailResponseSuccessDto,
-} from "../dto/sendMailResponse.dto";
+import { SendMailResponseDto, SendMailResponseFailDto, SendMailResponseSuccessDto } from "../dto/sendMailResponse.dto";
 import { sendMailSchema } from "../validator/sendMailSchema.validator";
 
 class MockMailService extends MailServiceI<any> {
@@ -34,8 +30,7 @@ describe("mailService", () => {
   it("should send mail if valid credentials provided", async () => {
     const mailServiceResponse = await mockMailService.sendMail({
       sender: "josue@example.com",
-      content:
-        "content content content content content content content content content",
+      content: "content content content content content content content content content",
       subject: "New thing",
     });
 
@@ -47,8 +42,7 @@ describe("mailService", () => {
     try {
       await mockMailService.sendMail({
         sender: "abc",
-        content:
-          "content content content content content content content content content",
+        content: "content content content content content content content content content",
         subject: "New thing",
       });
 
@@ -86,8 +80,7 @@ describe("mailService", () => {
     try {
       await mockMailService.sendMail({
         sender: "josue@example.com",
-        content:
-          "content content content content content content content content",
+        content: "content content content content content content content content",
         subject: "New",
       });
 

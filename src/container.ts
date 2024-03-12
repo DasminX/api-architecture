@@ -1,12 +1,6 @@
 import { notFoundController } from "./features/_shared/controller/notFound.controller";
 import { errorController } from "./features/_shared/controller/error.controller";
-import {
-  AwilixContainer,
-  InjectionMode,
-  asClass,
-  asValue,
-  createContainer,
-} from "awilix";
+import { AwilixContainer, InjectionMode, asClass, asValue, createContainer } from "awilix";
 import { App } from "./app";
 import { injectMailContainerDependencies } from "./features/mail/mailContainer";
 import { injectUserContainerDependencies } from "./features/user/userContainer";

@@ -11,7 +11,7 @@ export class AppError extends Error {
   constructor(
     public message: string,
     public statusCode: number,
-    public type = ErrorsEnum.UNKNOWN_ERROR
+    public type = ErrorsEnum.UNKNOWN_ERROR,
   ) {
     super(message);
 

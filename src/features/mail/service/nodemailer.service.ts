@@ -1,10 +1,6 @@
 import { Transporter, createTransport } from "nodemailer";
 import { MailServiceI, MailOptions } from "./abstraction";
-import {
-  SendMailResponseDto,
-  SendMailResponseFailDto,
-  SendMailResponseSuccessDto,
-} from "../dto/sendMailResponse.dto";
+import { SendMailResponseDto, SendMailResponseFailDto, SendMailResponseSuccessDto } from "../dto/sendMailResponse.dto";
 
 export class NodemailerService extends MailServiceI<Transporter> {
   public readonly transporter: Transporter = this.createTransport();

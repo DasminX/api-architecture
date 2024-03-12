@@ -24,6 +24,4 @@ export class SendMailResponseFailDto {
   }
 }
 
-export type SendMailResponseDto =
-  | SendMailResponseSuccessDto
-  | SendMailResponseFailDto;
+export type SendMailResponseDto = SendMailResponseSuccessDto | SendMailResponseFailDto;

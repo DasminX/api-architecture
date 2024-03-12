@@ -12,11 +12,7 @@ export const createUserSchema = z
   .strict();
 // Strict ensures it accepts only these properties and nothing more or less
 
-export const createUserSchemaValidator: ExpressHandlerType = (
-  req,
-  _res,
-  next
-) => {
+export const createUserSchemaValidator: ExpressHandlerType = (req, _res, next) => {
   try {
     parseZodObjectOrThrow(createUserSchema, req.body);
     next();

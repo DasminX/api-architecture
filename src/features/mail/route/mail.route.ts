@@ -21,10 +21,6 @@ export class MailRoute {
   }
 
   private _applyRoutesHandlers() {
-    this.router.post(
-      "/send",
-      this.sendMailSchemaValidator,
-      this.mailController.sendMail
-    );
+    this.router.post("/send", this.sendMailSchemaValidator, this.mailController.sendMail);
   }
 }
