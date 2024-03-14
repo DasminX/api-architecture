@@ -1,3 +1,5 @@
+import "reflect-metadata";
+
 import { loadEnvFile } from "./config/loadEnvFile";
 import { createAwilixContainer } from "./container";
 
