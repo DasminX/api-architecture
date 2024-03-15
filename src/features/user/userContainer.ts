@@ -3,7 +3,7 @@ import { UserRoute } from "./route/user.route";
 import { UserController } from "./controller/user.controller";
 import { UserService } from "./service/user.service";
 import { InMemoryUserRepository } from "./repository/inMemory.repository";
-import { createUserSchemaValidator } from "./validator/createUserSchema";
+import { userSchemaValidator } from "./validator/userSchema";
 
 export const injectUserContainerDependencies = (container: AwilixContainer) => {
   container.register({
@@ -11,6 +11,6 @@ export const injectUserContainerDependencies = (container: AwilixContainer) => {
     userController: asClass(UserController).singleton(),
     userService: asClass(UserService).singleton(),
     userRepository: asClass(InMemoryUserRepository).singleton(),
-    createUserSchemaValidator: asValue(createUserSchemaValidator),
+    userSchemaValidator: asValue(userSchemaValidator),
   });
 };
