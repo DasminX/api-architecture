@@ -36,7 +36,7 @@ It may change over time!
 
 7. **7_db** - seventh branch - its purpose is to add postgres image to compose file, some ORM and add "production-like" database where I will be able to do things, not in memory like so far. There, will refactorings occur in the way of consuming data in data-consumable layers like services. JUST INITIALIZED BRANCH  ***!Still in progress!***
 
-8. **master** - it is the most stable version of the most recent branch. For now, it reflects **6_user_feature** branch, but it may be different in the ***future***
+8. **master** - it is the most stable version of the most recent branch. For now, it reflects **7_db** branch, but it may be different in the ***future***
 
 **NOTE: It's not the end! I'm aware of many things to be fixed, to be done more reasonable and human-readable, so to say.**
 
