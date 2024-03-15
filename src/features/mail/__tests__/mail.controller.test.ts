@@ -4,7 +4,7 @@ import { formatZodErrorIssues } from "../../_shared/functions/formatZodErrorIssu
 import { ZodError } from "zod";
 import { MailOptions, MailServiceI } from "../service/abstraction";
 import { SendMailResponseDto, SendMailResponseFailDto, SendMailResponseSuccessDto } from "../dto/sendMailResponse.dto";
-import { sendMailSchema } from "../validator/sendMailSchema.validator";
+import { sendMailSchema } from "../validator/sendMailSchema";
 
 class MockMailService extends MailServiceI<any> {
   protected createTransport() {}
