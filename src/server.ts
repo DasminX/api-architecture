@@ -15,8 +15,15 @@ import { createAwilixContainer } from "./container";
 
   const port = process.env.PORT || 3000;
 
-  const server = container.cradle.appEntry.app.listen(port, () => {
-    console.log(`App running on port ${port}...`);
+  const server = container.cradle.appEntry.app.listen(port, async () => {
+    try {
+      await container.cradle.dataSource.initialize();
+      console.log("Database initialized...");
+    } catch (error) {
+      console.log("Error while initializing database...");
+    } finally {
+      console.log(`App running on port ${port}...`);
+    }
   });
 
   process.on("unhandledRejection", err => {

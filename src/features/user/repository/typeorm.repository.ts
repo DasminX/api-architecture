@@ -3,7 +3,7 @@ import { UserFields } from "../model/User.mock";
 import { UserRespositoryI } from "./abstraction";
 import { User } from "../model/User.entity";
 
-export class InMemoryUserRepository implements UserRespositoryI {
+export class TypeormRepository implements UserRespositoryI {
   private readonly dataSource: DataSource;
 
   constructor({ dataSource }: { dataSource: DataSource }) {
@@ -23,6 +23,7 @@ export class InMemoryUserRepository implements UserRespositoryI {
   }
 
   async getUsers(): Promise<User[]> {
+    console.log("wchodzi");
     return await this.dataSource.manager.find(User);
   }
 
