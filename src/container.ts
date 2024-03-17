@@ -4,12 +4,14 @@ import { AwilixContainer, InjectionMode, asClass, asValue, createContainer } fro
 import { App } from "./app";
 import { injectMailContainerDependencies } from "./features/mail/mailContainer";
 import { injectUserContainerDependencies } from "./features/user/userContainer";
+import { injectDBContainerDependencies } from "./db/dbContainer";
 
 export const createAwilixContainer = (): AwilixContainer => {
   const container = createContainer({
     injectionMode: InjectionMode.PROXY,
   });
 
+  injectDBContainerDependencies(container);
   injectMailContainerDependencies(container);
   injectUserContainerDependencies(container);
 

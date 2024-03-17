@@ -1,4 +1,4 @@
-import { User, UserFields } from "../model/User";
+import { User, UserFields } from "../model/User.mock";
 import { UserRespositoryI } from "../repository/abstraction";
 
 export type UserServiceIDeps = { userRepository: UserRespositoryI };

@@ -1,4 +1,4 @@
-import { UserFields, User } from "../model/User";
+import { UserFields, User } from "../model/User.mock";
 import { UserRespositoryI } from "./abstraction";
 
 export class InMemoryUserRepository implements UserRespositoryI {
