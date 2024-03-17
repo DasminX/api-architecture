@@ -23,7 +23,6 @@ export class TypeormRepository implements UserRespositoryI {
   }
 
   async getUsers(): Promise<User[]> {
-    console.log("wchodzi");
     return await this.dataSource.manager.find(User);
   }
 
