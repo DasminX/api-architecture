@@ -42,14 +42,13 @@ It may change over time!
 
 ### Plans for the future
 
-- I defenitely will create development and production builds seperately (maybe runtime variables also?), which also comes with creating more class instances based on current classes (woohooo, more OOP!!)
 - I certainly must focus more on tests - I'm a novice in this - some refactorings? more tests? Soon :)
 - Also, I can see possibilities to add other features, like:
   - Users (registering, logging, sending mails to other users etc? or more granular like auth seperately also? will see)
   - Movies (adding to favourites, commenting, subscribing for newsletter about new movies? I will also think about it)
   - other, which I haven't thought about yet :)
 
-#### All in the name of self-development!
+#### All in the name of self-development
 
 ---
 
@@ -79,49 +78,20 @@ cp .env.dist .env
 
 **For production use:**
 
-*Scripts changed since the last publish, not ready yet*
 
-<!-- 1. Create an image
+    npm run docker:compose-prod
 
-    ```
-
-    npm run docker:build
-
-    ```
-
-2. Run the container
-
-    ```
-
-    npm run docker:start
-
-    ```
-
-3. After development, stop and remove container
-
-    ```
-
-    npm run docker:destroy
-
-    ``` -->
 
 **For devel use:**
 
-1. Run compose up
+    npm run docker:compose-dev
 
-    ```
+**If you finish using any of above:**
 
-    docker compose up
+    npm run docker:compose-down
 
-    ```
 
-2. After the development, run compose down
-
-    ```
-
-    docker compose down -v
-
-    ```
+***NOTE: It removes composed containers for both prod and dev modes!***
 
 #### On local machine
 
@@ -182,8 +152,6 @@ When successfully run, you can send API calls to localhost:3000!
 
 ```
 
-**NOTE: Valid credentials already work!**
-
 **TEMPORARY**
 
 3. Also, for manipulating user-feature demo, you can do such things:
@@ -191,4 +159,3 @@ When successfully run, you can send API calls to localhost:3000!
 - Send POST Request to <http://localhost:3000/api/v1/users> (create user)
 - Send GET Request to <http://localhost:3000/api/v1/users> (get all users)
 - Send GET Request to <http://localhost:3000/api/v1/users/:id> (get user by id)
-
