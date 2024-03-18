@@ -10,11 +10,14 @@
   "type": "commonjs",
   "scripts": {
     "prettify": "npx prettier ./src --write",
+    "start:dev": "nodemon --legacy-watch ./src/server.ts",
     "start:prod": "npm cache clean --force && tsc && NODE_ENV=production node ./dist/server.js",
     "docker:build": "docker image build -t api-architecture .",
     "docker:start": "docker container run -p 3000:3000 --name api-architecture-cont api-architecture",
     "docker:destroy": "docker container kill api-architecture-cont && docker container rm api-architecture-cont",
-    "start:dev": "nodemon --legacy-watch ./src/server.ts",
+    "docker:compose-dev": "docker compose -f ./compose.dev.yml up",
+    "docker:compose-prod": "docker compose -f ./compose.prod.yml up",
+    "docker:compose-down": "docker compose -f ./compose.dev.yml -f ./compose.prod.yml down -v",
     "test": "vitest run --dir ./src",
     "test:watch": "vitest watch --dir ./src",
     "docker:test": "docker container run --rm -p 3000:3000 api-architecture sh -c \"npm run test\""
